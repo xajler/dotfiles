@@ -1,4 +1,5 @@
 #!/bin/bash
-xbps=$(xbps-install -Mnu 2> /dev/null | wc -l)
+pac=$(checkupdates 2> /dev/null | wc -l)
+aur=$(cower -u 2> /dev/null | wc -l)
 
-echo " $xbps "
+echo "$pac  $aur"

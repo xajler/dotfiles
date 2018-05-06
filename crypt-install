@@ -1,8 +1,0 @@
-cryptsetup luksFormat /dev/sda2
-cryptsetup luksOpen /dev/sda2 cryptroot
-mkfs.ext4 /dev/mapper/cryptroot
-mount /dev/mapper/cryptroot /mnt
-mkdir /mnt/dev /mnt/proc /mnt/sys
-mount --rbind /dev /mnt/dev
-mount --rbind /proc /mnt/proc
-mount --rbind /sys /mnt/sys

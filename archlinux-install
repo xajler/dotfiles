@@ -1,0 +1,74 @@
+# chroot setup
+pacman -S git neovim intel-ucode bash-completion iw wpa_supplicant grub
+ln -sf /usr/share/zoneinfo/Europe/Zagreb /etc/localtime
+hwclock --systohc
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+echo LANG=en_US.UTF-8 > /etc/locale.conf
+locale-gen
+echo -e "KEYMAP=dvorak\nFONT=ter-v20b" > /etc/vconsole.conf
+echo x430n > /etc/hostname
+echo -e "127.0.0.1\tlocalhost\n::1\t\tlocalhost\n127.0.1.1\tx430n.localdomain\tx430n" >> /etc/hosts
+mkinitcpio -p linux
+# BIOS grup install
+grub-install --target=i386-pc /dev/sda
+grub-mkconfig -o /boot/grub/grub.cfg
+
+# create user x and add it to default wheel group + audio and video
+useradd -m -g wheel -G audio,video -s /bin/bash x
+# Set user x password
+passwd x
+
+# Add wheel group to sudo
+sed -i -e "s|^# %wheel ALL=(ALL) ALL|%wheel ALL=(ALL) ALL|g" visudo
+# Or add wheel grop to sudo and don't ask password
+#sed -i -e "s|^# %wheel ALL=(ALL) NOPASSWD: ALL|%wheel ALL=(ALL) NOPASSWD: ALL|g" visudo
+
+exit && umount -R /mnt && reboot
+
+
+# Install all needed apps
+sudo pacman -S base-devel neofetch tlp powertop htop lm_sensors fzf alsa-utils alsa-plugins alsa-lib alsa-firmware xorg-server xorg-xinit xcape xf86-video-intel xf86-input-libinput ranger qutebrowser calcurse mpd mpc mpv compton youtube-dl ffmpeg feh scrot tmux lxappearance xautolock mupdf cmatrix openvpn terminus-font ncmpcpp i3-gaps i3status i3lock acpi tree imagemagick w3m sxiv bind-tools gnumeric r newsboat xclip noto-fonts firefox wget curl libx11 libxft libxinerama freetype2 fontconfig acpi_call-dkms smartmontools gnupg pass openssh dunst dotnet-sdk
+
+# Install Packer
+sudo pacman -S --noconfirm --needed grep sed bash curl pacman jshon expac
+mkdir /tmp/packer
+wget https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=packer
+mv PKGBUILD\?h\=packer /tmp/packer/PKGBUILD
+cd /tmp/packer
+makepkg -i /tmp/packer --noconfirm
+[ -d /tmp/packer ] && rm -rf /tmp/packer
+# Just checking if installation was successful
+if pacman -Qi $package &> /dev/null; then
+
+# Install AUR apps
+packer -S yaourt polybar xcalib urlview stride ttf-font-awesome-4 yadm-git openvpn-update-systemd-resolved
+
+# OpenVPN & ProtonVPN
+
+sudo systemctl enable systemd-resolved.service
+sudo systemctl start systemd-resolved.service
+
+# patch-protonvpn.sh script
+#!/bin/sh
+
+sed -i -e "s|^auth-user-pass|auth-user-pass /etc/openvpn/client/login.conf|g" \
+       -e "s|^up /etc/openvpn/update-resolv-conf|up /etc/openvpn/scripts/update-systemd-resolved|g" \
+       -e "s|^down /etc/openvpn/update-resolv-conf|down /etc/openvpn/scripts/update-systemd-resolved|g" $1
+
+
+# TODO: patch all at once
+# Patch ProtonVPN .ovpn file
+./patch-protonvpn.sh de-05.protonvpn.com.udp1194.ovpn
+# TODO: script to stop current, enable and/or start new one by name
+sudo systemctl enable openvpn-client@de-05
+sudo systemctl start openvpn-client@de-05
+
+sudo echo -e "# Use /etc/resolv.conf first, then fall back to systemd-resolved\nhosts: files dns resolve x430n\n# Use systemd-resolved first, then fall back to /etc/resolv.conf\nhosts: files resolve dns x430n\n# Don't use /etc/resolv.conf at all\nhosts: files resolve x430n" > /etc/nsswitch.conf
+
+# Setup wifi
+
+# Create /etc/wpa_supplicant/wpa_supplicant-wlp3s0.conf (for interface wlp3s0)
+echo -e "# Default configuration file for wpa_supplicant.conf(5).\n\nctrl_interface=/run/wpa_supplicant\nctrl_interface_group=wheel\neapol_version=1\nap_scan=1\nfast_reauth=1\nupdate_config=1\n\n# Add here your networks." > /etc/wpa_supplicant/wpa_supplicant-wlp3s0.conf
+# Change <ssid> <pass>
+wpa_passphrase <ssid> <pass> >> /etc/wpa_supplicant/wpa_supplicant-wlp3s0.conf
+systemctl enable wpa_supplicant@wlp3s0.service

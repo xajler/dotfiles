@@ -1,28 +1,67 @@
 # Install Void Linux
 
 
-![void](void.png)
+![archlinux](arch.png)
 
 ## Credits;
 
 * Luke Smith [voidrice](https://github.com/LukeSmithxyz/voidrice)
 * Drew DeVault [dotfiles](https://drewdevault.com/feed.xml)
-* David Paulos [XbpsUI](https://github.com/davidpaulos/XbpsUI)
 
-## Install
+## Chroot setup
 
-**TODO: This text needs changes**
+    pacman -S git neovim intel-ucode bash-completion iw wpa_supplicant
+    ln -sf /usr/share/zoneinfo/Europe/Zagreb /etc/localtime
+    hwclock --systohc
+    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+    echo LANG=en_US.UTF-8 > /etc/locale.conf
+    locale-gen
+    echo -e "KEYMAP=dvorak\nFONT=ter-v20b" > /etc/vconsole.conf
+    echo x430n > /etc/hostname
+    echo -e "127.0.0.1\tlocalhost\n::1\t\tlocalhost\n127.0.1.1\tx430n.localdomain\tx430n" >> /etc/hosts
+    mkinitcpio -p linux
 
-Update Void Linux
+    # BIOS grup install
+    grub-install --target=i386-pc /dev/sda
+    grub-mkconfig -o /boot/grub/grub.cfg
 
-    sudo xbps-install -Syu
+    # create user x and add it to default wheel group + audio and video
+    useradd -m -g wheel -G audio,video -s /bin/bash x
+    # Set user x password
+    passwd x
 
-Install elementary software
+    # Add wheel group to sudo
+    sed -i -e "s|^# %wheel ALL=(ALL) ALL|%wheel ALL=(ALL) ALL|g" visudo
+    # Or add wheel grop to sudo and don't ask password
+    #sed -i -e "s|^# %wheel ALL=(ALL) NOPASSWD: ALL|%wheel ALL=(ALL) NOPASSWD: ALL|g" visudo
 
-    sudo xbps-install -S git neovim
-    sudo xbps-install -S bash-completion neofetch
-    sudo xbps-install -S tlp powertop htop lm_sensors fzf intel-ucode
+exit && umount -R /mnt && reboot
 
+## Install all apps including AUR
+
+Install Pacman apps
+
+    # Install all needed apps with pacman
+    sudo pacman -S base-devel neofetch tlp powertop htop lm_sensors fzf alsa-utils alsa-plugins alsa-lib alsa-firmware xorg-server xorg-xinit xcape xf86-video-intel xf86-input-libinput ranger qutebrowser calcurse mpd mpc mpv compton youtube-dl ffmpeg feh scrot tmux lxappearance xautolock mupdf cmatrix openvpn terminus-font ncmpcpp i3-gaps i3status i3lock acpi tree imagemagick w3m sxiv bind-tools gnumeric r newsboat xclip noto-fonts firefox wget curl libx11 libxft libxinerama freetype2 fontconfig acpi_call-dkms smartmontools gnupg pass openssh dunst dotnet-sdk
+
+
+Install Packer
+
+    sudo pacman -S --noconfirm --needed grep sed bash curl pacman jshon expac
+    mkdir /tmp/packer
+    wget https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=packer
+    mv PKGBUILD\?h\=packer /tmp/packer/PKGBUILD
+    cd /tmp/packer
+    makepkg -i /tmp/packer --noconfirm
+    [ -d /tmp/packer ] && rm -rf /tmp/packer
+    # Just checking if installation was successful
+    if pacman -Qi $package &> /dev/null; then
+
+Install AUR apps
+
+    packer -S yaourt polybar xcalib urlview stride ttf-font-awesome-4 yadm-git openvpn-update-systemd-resolved
+
+## Dotfiles, user folders, ssh...
 
 Crete user's folders
 
@@ -32,6 +71,9 @@ Create src folder and clone dotfiles
 
     cd ~/src
     git clone https://github.com/xajler/voidlinux-i3.git
+    git fetch
+    # Checkout to archlinux branch
+    get checkout archlinux
 
 
 Create /mnt/usb dir and mount to it
@@ -49,85 +91,43 @@ Copy .ssh and chmod-it
 
 Copy dotfiles to home folder
 
-    cp -rf ~/src/voidlinux-i3/* ~/
-    cp -rf ~/src/voidlinux-i3/.* ~/
+    cd ~/src/voidlinux-i3
+    cp -rf *  ~/
+    source .bash_profile
 
 Install Vim Plugs (inside neovim)
 
+    vim
     :PlugInstall
-
-Install sound
-
-    sudo xbps-install -S alsa-utils alsa-plugins alsa-lib alsa-firmware
-    sudo xbps-install -S pulseaudio ConsoleKit2 pavucontrol
-
-Install xorg
-
-    sudo xbps-install -S xorg-server xorg-apps xorg-minimal xinit xterm xcape
-    sudo xbps-install -S xf86-video-intel xf86-input-libinput
-
-Install apps
-
-    sudo xbps-install -S rxvt-unicode ranger qutebrowser calcurse mpd mpc mpv compton
-    sudo xbps-install -S youtube-dl ffmpeg feh arandr scrot mirage tmux urxvt-perls
-    sudo xpbs-install -S lxappearance xautolock mupdf cmatrix openvpn terminus-font ncmpcpp
-    sudo xbps-install -S font-unifont-bdf font-awesome
-    sudo xbps-install -S i3-gaps i3status i3lock i3blocks
-    sudo xbps-install -S acpi playerctl sysstat tree ImageMagick w3m w3m-img dunst sxiv
-    sudo xbps-install -S polybar
-    sudo xbps-install -S xcalib bind-utils gnumeric R
-    sudo xbps-install -S unclutter newsboat xclip
-    sudo xbps-install -S noto-fonts-ttf liberation-fonts-ttf
-    sudo xbps-install -S envypn-font
-    sudo xbps-install -S firefox
-    sudo xbps-install -S wget curl urlview
-    # For compiling in general
-    sudo xbps-install -S base-devel
-    # For compiling st
-    sudo xbps-install -S fontconfig-devel libX11-devel libXft-devel
-    # For compiling dmenu
-    sudo xbps-install -S libXinerama-devel libXft-devel freetype-devel
-
-    # Suggestions by tlp
-    sudo xbps-install -S acpi_call-dkms smartmontools
-
-Install security
-
-    sudo xbps-install -S gpg gpg2 yadm pass
-
-Add URxvt font resize
-
-    cd ~/src
-    git clone https://github.com/simmel/urxvt-resize-font
-    sudo cp ~/src/urxvt-resize-font/resize-font /usr/lib/urxvt/perl
 
 ## Configuration
 
 ### Services
 
-Link and start services
-
-    la /var/service
-    sudo ln -sf /etc/sv/dbus /var/service
-    sudo ln -sf /etc/sv/tlp /var/service
-    sudo ln -sf /etc/sv/alsa /var/service
-    sudo ln -sf /etc/sv/cgmanager /var/service
-    reboot # easier than up all
+    sudo systemctl enable dhcpcd
+    sudo systemctl start dhcpcd
+    sudo systemctl enable systemd-resolved.service
+    sudo systemctl start systemd-resolved.service
 
 ### Wifi
 
 WiFi config (WPA)
 
     # enter root
-    su
-    cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlp3s0.conf
-    wpa_passphrase <SSID> <password> >> /etc/wpa_supplicant/wpa_supplicant-wlp3s0.conf
+    sudo su
 
-    # test confing
+    # Create /etc/wpa_supplicant/wpa_supplicant-wlp3s0.conf (for interface wlp3s0)
+    echo -e "# Default configuration file for wpa_supplicant.conf(5).\n\nctrl_interface=/run/wpa_supplicant\nctrl_interface_group=wheel\neapol_version=1\nap_scan=1\nfast_reauth=1\nupdate_config=1\n\n# Add here your networks." > /etc/wpa_supplicant/wpa_supplicant-wlp3s0.conf
+    # Change <ssid> <pass>
+    wpa_passphrase <ssid> <pass> >> /etc/wpa_supplicant/wpa_supplicant-wlp3s0.conf
+
+
+    # Enable and run service (make sure dhcpcd is running)
+    sudo systemctl enable wpa_supplicant@wlp3s0.service
+    sudo systemctl start wpa_supplicant@wlp3s0.service
+
+    # test confing without running service
     wpa_supplicant -i wlp3s0 -c /etc/wpa_supplicant/wpa_supplicant-wlp3s0.conf
-
-    # Remove current wifi device 'wlp3s0' setup
-     sudo rm /run/wpa_supplicant/wlp3s0
 
     # exit root
     exit
@@ -168,59 +168,53 @@ Temporary WiFi config (WPA)
     wpa_supplicant -i wlp3s0 -c /etc/wpa_supplicant/wpa_supplicant-<SSID-name>.conf &
 
 
-### VPN
+### OpenVPN & ProtonVPN
 
-ProtonVPN
+    # copy login.conf with ProtonVPN credentials
+    sudo cp login.conf /etc/openvpn
+    sudo chown root:root /etc/openvpn/login.conf
+    sudo chmod 600 /etc/openvpn/login.conf
 
-    # Create dir for openvpn cilent
-    sudo mkdir -p /etc/openvpn/client
 
-    # Create login conf with ProtonVPN username pass
-    # First line in file: proton account user
-    # Second line in file: proton account pass
-    sudo vim /etc/openvpn/client/login.conf
+    # TODO: patch all at once
+    # Patch ProtonVPN .ovpn file
+    ./patch-protonvpn.sh de-05.protonvpn.com.udp1194.ovpn
+    # TODO: script to stop current, enable and/or start new one by name
 
-    # Make this file only readable by root
-    sudo chmod 600 /etc/openvpn/client/login.conf
+    # Copy and rename ProtonVPN .ovpn file
+    sudo cp de-05.protonvpn.com.udp1194.ovpn /etc/openvpn/client
+    sudo mv de-05.protonvpn.com.udp1194.ovpn de-05.conf
 
-    # Copy all ProtonVPN .ovpn to openvpn client
-    sudo cp ~/Downloads/*.ovpn /etc/openvpn/client
+    # Enable and start service (make sure service systemd-resolved.service is enabled
+    and running)
+    sudo systemctl enable openvpn-client@de-05
+    sudo systemctl start openvpn-client@de-05
 
-Patch ProtonVPN ovpn's
+    # patch-protonvpn.sh script still needs more features
+    #!/bin/sh
 
-    # Open ProtonVPN ovpn
-    sudo vim /etc/openvpn/client/de-03.protonvpn.com.udp1194.ovpn
-
-    # add login.conf to auth-user-pass
-    auth-user-pass /etc/openvpn/client/login.conf
-
-    # Comment two lines calling update-resolv-conf, create runit services
-    #up /etc/openvpn/update-resolv-conf
-    #down /etc/openvpn/update-resolv-conf
-
-Create ProtonVPN runit services
-
-    # TODO
+    sed -i -e "s|^auth-user-pass|auth-user-pass /etc/openvpn/client/login.conf|g" \
+           -e "s|^up /etc/openvpn/update-resolv-conf|up /etc/openvpn/scripts/update-systemd-resolved|g" \
+           -e "s|^down /etc/openvpn/update-resolv-conf|down /etc/openvpn/scripts/update-systemd-resolved|g" $1
 
 ### Bluetooth
 
 Bluetooh
 
-    sudo xbps-install -S bluez
+    sudo pacman -S bluez
     # Turn off bluetooth, use 'on' to turn it  on
     sudo bluetooth off
+    # TODO: is this working for arch too?
     # use rc.local to turn it off on startup
 
 ### Audio
+
 Test sound with speakers and headphones
 
-    # make sure nothing is at 0 or use pavucontrol
+    # make sure nothing is at 0
     alsamixer
 
-    # unmute muted devices
-    pavucontrol
-
-Sound problems mulitpile card
+Sound problems mulitpile card (ThinkPad t440s)
 
     # Create alsa-base.conf if not existed
     sudo vim  /etc/modprobe.d/alsa-base.conf
@@ -229,10 +223,6 @@ Sound problems mulitpile card
     options snd-hda-intel index=1,0
 
 ### Misc
-
-Test urxvt font
-
-    urxvt -fn 'xft:terminus:pixelsize=13'
 
 Test calibration file
     # Get display name
@@ -245,16 +235,11 @@ Nodejs - npm
 
     Read in [npm docs](https://docs.npmjs.com/getting-started/fixing-npm-permissions)
 
-    sudo xbps-install -S nodejs-lts
+    sudo xbps-install -S nodejs-lts-boron
     mkdir ~/.npm-global
     npm config set prefix '~/.npm-global'
     # Add to .bash_profile
     export PATH=~/.npm-global/bin:$PATH
     source ~/.bash_profile
 
-Void mklive
-
-     sudo xbps-install lz4-devel
-     sudo xbps-install -S qemu-user-static
-    sudo bash mklive.sh -k dvorak -p 'vim bash bash-completion git gnupg gnupg2 yadm dialog'
 

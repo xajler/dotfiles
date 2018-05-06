@@ -1,0 +1,3 @@
+echo -e "# Default configuration file for wpa_supplicant.conf(5).\n\nctrl_interface=/run/wpa_supplicant\nctrl_interface_group=wheel\neapol_version=1\nap_scan=1\nfast_reauth=1\nupdate_config=1\n\n# Add here your networks." > wpa_supplicant-wlp3s0.conf
+# Change <ssid> <pass>
+wpa_passphrase <ssid> <passphrase> >> wpa_supplicant-wlp3s0.conf

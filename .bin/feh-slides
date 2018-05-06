@@ -81,7 +81,7 @@ if [ -d "$1" ]; then
 		for FILE in "${1%\/}"/*; {
 			if [ -f "$FILE" ]; then
 				if [ -x /usr/bin/feh ]; then
-					/usr/bin/feh --no-fehbg --bg-center "$FILE"
+					/usr/bin/feh --no-fehbg --bg-scale --bg-center "$FILE"
 				elif [ -x /usr/bin/nitrogen ]; then
 					/usr/bin/nitrogen --replace "$FILE"
 				else
