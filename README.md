@@ -1,9 +1,9 @@
-# Install Void Linux
+# Install Arch Linux
 
 
 ![archlinux](arch.png)
 
-## Credits;
+## Credits:
 
 * Luke Smith [voidrice](https://github.com/LukeSmithxyz/voidrice)
 * Drew DeVault [dotfiles](https://drewdevault.com/feed.xml)
