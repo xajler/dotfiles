@@ -10,15 +10,15 @@ case "$x" in
         i3-msg exit && disown
         ;;
     suspend)
-		SUDO_ASKPASS=~/.scripts/dpass sudo -A bash -c 'blurlock; systtemctl suspend'
+		SUDO_ASKPASS=~/.scripts/dpass sudo -A bash -c 'blurlock; systemctl suspend'
         ;;
     hibernate)
-		SUDO_ASKPASS=~/.scripts/dpass sudo -A bash -c 'blurlock; systemcts hibernate'
+		SUDO_ASKPASS=~/.scripts/dpass sudo -A bash -c 'blurlock; systemctl hibernate'
         ;;
     reboot)
 		SUDO_ASKPASS=~/.scripts/dpass sudo -A reboot
         ;;
     shutdown)
-		SUDO_ASKPASS=~/.scripts/dpass sudo -A systemctl poweroff
+		SUDO_ASKPASS=~/.scripts/dpass sudo -A shutdown -h now
         ;;
 esac

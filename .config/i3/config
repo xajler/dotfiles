@@ -9,8 +9,6 @@ gaps outer 3
 font pango:mono 9
 set $mod Mod4
 set $term --no-startup-id st
-set $video --no-startup-id bash ~/.config/Scripts/video.sh
-set $stoprec --no-startup-id killall ffmpeg
 
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
@@ -22,7 +20,7 @@ focus_follows_mouse no
 #Setting the background:
 exec_always --no-startup-id feh --bg-scale ~/.config/wall.png
 #Starts dunst for notifications:
-#exec --no-startup-id dunst
+exec --no-startup-id dunst
 #Music player daemon:
 exec --no-startup-id mpd
 #Composite manager:
@@ -37,7 +35,7 @@ exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id polybar-launch
 
 # Cycle desktop wallpapers from given #FEH_SLIDES folder
-exec $HOME/.bin/feh-slides -i 7 "$FEH_SLIDES" & disown
+exec $HOME/.bin/feh-slides -i 10 "$FEH_SLIDES" & disown
 
 ###---Audio and Music Definitions---###
 ##For mpc:
@@ -61,18 +59,6 @@ set $truemute --no-startup-id amixer sset Master mute
 set $screencast  --no-startup-id bash ~/.config/Scripts/screencast_alsa.sh
 set $audio --no-startup-id bash ~/.config/Scripts/audio_alsa.sh
 
-#For PULSEAUDIO/PAMIXER
-#set $inc --no-startup-id pamixer --allow-boost -i 5
-#set $biginc --no-startup-id pamixer --allow-boost -i 15
-#set $dec --no-startup-id pamixer --allow-boost -d 5
-#set $bigdec --no-startup-id pamixer --allow-boost -d 15
-#set $mute --no-startup-id pamixer --allow-boost -t
-#set $micmute --no-startup-id pamixer --allow-boost -t
-#set $truemute --no-startup-id pamixer -m
-#set $screencast  --no-startup-id bash ~/.config/Scripts/screencast_pulse.sh
-#set $audio --no-startup-id bash ~/.config/Scripts/audio_pulse.sh
-
-
 ###---Dropdown/Scratchpad Windows---###
 
 #Then I have a window running R I use for basic arithmetic
@@ -82,6 +68,7 @@ for_window [instance="math"] resize set 800 300
 for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 5
 #exec --no-startup-id $term -n math -f mono:pixelsize=24 -e R -q
+
 
 ###---Basic Bindings---###
 bindsym $mod+F2			    exec --no-startup-id blurlock
@@ -352,6 +339,15 @@ bindsym XF86Display		        exec --no-startup-id arandr
 #bindsym XF86Battery		    exec
 #bindsym XF86Bluetooth	    	exec
 
+
+assign [instance="^stride$"] 8
+for_window [instance="stride"] floating enable
+for_window [instance="stride"] resize set 1100 900
+for_window [instance="stride"] border normal, focus
+
+assign [instance="^skype$"] 8
+for_window [instance="skype"] floating enable
+for_window [instance="skype"] border normal, focus
 
 assign [instance="^qutebrowser$"] 4
 for_window [instance="^qutebrowser$"] border pixel 0, focus

@@ -8,6 +8,7 @@ export EDITOR="vim"
 export TERMINAL="st" #"urxvt"
 export FEH_SLIDES="$HOME/Pictures/wallpapers"
 export BROWSER="qutebrowser"
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 if [[ ! $DISPLAY ]]; then
   exec startx
