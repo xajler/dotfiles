@@ -326,3 +326,8 @@ If error with 'network controller' stop VPN and try again, it works afterwards w
       -U SA \
       -P <sa-passwd> \
       -Q "CREATE LOGIN <new-usr> WITH PASSWORD=N'<new-usr-passwd>', DEFAULT_DATABASE=[master], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF; ALTER SERVER ROLE [sysadmin] ADD MEMBER <new-usr-name>"
+
+### use sqlcmd 
+
+[Read
+more](https://docs.microsoft.com/en-us/sql/relational-databases/scripting/sqlcmd-use-the-utility?view=sql-server-2017) info about sqlcmd and how to use it.
