@@ -54,7 +54,6 @@ alias p="cd ~/Pictures && ls -a"
 alias m="cd ~/Music && ls -a"
 alias r="cd / && ls -a"
 alias cf="cd ~/.config && ls -a"
-alias vim="nvim"
 alias cfr="vim ~/.config/ranger/rc.conf.base"
 alias cfi="vim ~/.config/i3/config"
 alias cfq="vim ~/.config/qutebrowser/config.py"
@@ -66,6 +65,8 @@ alias gtmu="cd /mnt/usb;ls -al"
 
 # Some aliases
 alias p="sudo pacman"
+alias SS="sudo systemctl"
+alias vim="nvim"
 alias v="vim"
 alias svi="sudo vim"
 alias r="ranger"
@@ -97,6 +98,7 @@ alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
 #alias fake="mono /home/x/src/qualtrak/Fake/tools/FAKE.exe"
 alias hfspmnt="sudo mount -t hfsplus /dev/sdb2 /mnt/usb"
 alias i3tree="i3-msg -t get_tree"
+alias gpg="gpg2"
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

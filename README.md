@@ -31,9 +31,9 @@
     passwd x
 
     # Add wheel group to sudo
-    sed -i -e "s|^# %wheel ALL=(ALL) ALL|%wheel ALL=(ALL) ALL|g" visudo
+    #sed -i -e "s|^# %wheel ALL=(ALL) ALL|%wheel ALL=(ALL) ALL|g" visudo
     # Or add wheel grop to sudo and don't ask password
-    #sed -i -e "s|^# %wheel ALL=(ALL) NOPASSWD: ALL|%wheel ALL=(ALL) NOPASSWD: ALL|g" visudo
+    sed -i -e "s|^# %wheel ALL=(ALL) NOPASSWD: ALL|%wheel ALL=(ALL) NOPASSWD: ALL|g" visudo
 
 exit && umount -R /mnt && reboot
 
@@ -42,7 +42,7 @@ exit && umount -R /mnt && reboot
 Install Pacman apps
 
     # Install all needed apps with pacman
-    sudo pacman -S base-devel neofetch tlp powertop htop lm_sensors fzf alsa-utils alsa-plugins alsa-lib alsa-firmware xorg-server xorg-xinit xcape xf86-video-intel xf86-input-libinput ranger qutebrowser calcurse mpd mpc mpv compton youtube-dl ffmpeg feh scrot tmux lxappearance xautolock mupdf cmatrix openvpn terminus-font ncmpcpp i3-gaps i3status i3lock acpi tree imagemagick w3m sxiv bind-tools gnumeric r newsboat xclip noto-fonts firefox wget curl libx11 libxft libxinerama freetype2 fontconfig acpi_call-dkms smartmontools gnupg pass openssh dunst dotnet-sdk keybase
+    sudo pacman -S base-devel neofetch tlp powertop htop lm_sensors fzf alsa-utils alsa-plugins alsa-lib alsa-firmware xorg-server xorg-xinit xcape xf86-video-intel xf86-input-libinput ranger qutebrowser calcurse mpd mpc mpv compton youtube-dl ffmpeg feh scrot tmux lxappearance xautolock mupdf cmatrix openvpn terminus-font ncmpcpp i3-gaps i3status i3lock acpi tree imagemagick w3m sxiv bind-tools libreoffice-fresh r newsboat xclip noto-fonts firefox wget curl libx11 libxft libxinerama freetype2 fontconfig acpi_call-dkms smartmontools gnupg pass openssh dunst dotnet-sdk keybase docker python-pip
 
 
 Install Packer
@@ -59,7 +59,7 @@ Install Packer
 
 Install AUR apps
 
-    packer -S yaourt polybar xcalib urlview stride ttf-font-awesome-4 yadm-git openvpn-update-systemd-resolved skypeforlinux-preview-bin fsharp
+    packer -S yaourt polybar xcalib urlview stride ttf-font-awesome-4 yadm-git openvpn-update-systemd-resolved skypeforlinux-preview-bin fsharp mssql-server mssql-tools
 
 ## Dotfiles, user folders, ssh...
 
@@ -99,6 +99,8 @@ Install Vim Plugs (inside neovim)
 
     vim
     :PlugInstall
+    # This actually not working
+    # sudo pip install neovim
 
 ## Configuration
 
@@ -231,7 +233,7 @@ Test calibration file
     # Test running Lenovo ThinkPad x220
     xcalib -d :0 .config/icc/Profiles/Color-LCD-#1-2016-02-16-02-0-2.2-F-S-XYZLUT+MTX.icc
 
-Nodejs - npm
+## Nodejs - npm
 
     Read in [npm docs](https://docs.npmjs.com/getting-started/fixing-npm-permissions)
 
@@ -242,4 +244,85 @@ Nodejs - npm
     export PATH=~/.npm-global/bin:$PATH
     source ~/.bash_profile
 
+## Docker
 
+### Install and user to group
+
+    sudo pacman -S docker
+    # Enable docker service, if desired to run on each boot
+    sudo systemctl enable docker.service
+    # Add current user (x) to docker group
+    sudo usermod -aG docker x
+    # Confirm user (x) is part of docker group
+    id x
+
+### Change default images dir
+
+    # enter root
+    sudo su
+    # Create folder for images
+    mkdir -p /home/docker
+    chmod 711 /home/docker
+
+    # Crete conf file and folders to it if not existing
+    mkdir -p /etc/systemd/system/docker.service.d
+    vim /etc/systemd/system/docker.service.d/docker-storage.conf
+
+    # Enter this text
+    [Service]
+    ExecStart=
+    ExecStart=/usr/bin/dockerd --data-root=/home/docker -H fd://
+
+### Start and/or Enable service
+
+    # If previously docker was running, first reload daemon
+    systemctl daemon-reload
+    # Then stop it, the start it or enable it.
+    systemctl stop docker.service
+
+    # For running on each boot use enable, if not just do start, when needed, my option:
+    # systemctl enable docker.service
+    # Only start docker service, without running on each boot
+    systemctl start docker.service
+    # exit root
+    exit
+
+### Pull image
+
+    # Pull image
+    docker pull <image>:<tag>
+    # or create image from existing Dockerfile
+
+
+### Troubleshooting
+
+if service fails to start and `journal -xe` or `journal -u docker` have error 'overlay'.
+
+    sudo modprobe overlay
+	sudo dockerd --storage-driver=overlay
+
+If modprobe fails cannot find it in /lib/modules, make sure that no new kernel is installed in meantime.
+If new kernel is installed then reboot and run `sudo depmod` then those 2 previous commands.
+If error with 'network controller' stop VPN and try again, it works afterwards with VPN or not.
+
+## mssql server
+
+### Configure and test
+
+    # Choose 3) Express for edition, then enter 'sa' password must be at least 8 chars or longer
+    sudo /opt/mssql/bin/mssql-conf setup accept-eula
+
+    # Test connection, if having 1 row affecetd, and version is displayed then it is success
+    /opt/mssql-tools/bin/sqlcmd \
+    -S localhost \
+    -U SA \
+    -P <sa-passwd> \
+    -Q "SELECT @@VERSION" 2>/dev/null
+
+### Create default user
+
+    /opt/mssql-tools/bin/sqlcmd \
+      -S localhost \
+      -U SA \
+      -P <sa-passwd> \
+      -Q "CREATE LOGIN <new-usr> WITH PASSWORD=N'<new-usr-passwd>', DEFAULT_DATABASE=[master], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF; ALTER SERVER ROLE [sysadmin] ADD MEMBER <new-usr-name>"

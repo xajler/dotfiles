@@ -341,18 +341,20 @@ bindsym XF86Display		        exec --no-startup-id arandr
 
 
 assign [instance="^stride$"] 8
-for_window [instance="stride"] floating enable
-for_window [instance="stride"] resize set 1100 900
-for_window [instance="stride"] border normal, focus
+for_window [instance="^stride$"] floating enable
+for_window [instance="^stride$"] resize set 1100 900
+for_window [instance="^stride$"] border normal, focus
 
 assign [instance="^skype$"] 8
-for_window [instance="skype"] floating enable
-for_window [instance="skype"] border normal, focus
+for_window [instance="^skype$"] floating enable
+for_window [instance="^skype$"] border normal, focus
 
 assign [instance="^qutebrowser$"] 4
 for_window [instance="^qutebrowser$"] border pixel 0, focus
-assign [instance="^gnumeric$"] 5
-for_window [instance="^gnumeric$"] border pixel 0, focus
+assign [class="^Firefox$"] 5
+for_window [class="^Firefox$"] border pixel 0, focus
+assign [instance="^libreoffice$"] 6
+for_window [instance="^libreoffice$"] border pixel 0, focus
 assign [class="^mpv$"] 7
 for_window [class="^mpv$"] border pixel 0, focus, fullscreen
 for_window [instance="^mupdf$"] border pixel 0, focus

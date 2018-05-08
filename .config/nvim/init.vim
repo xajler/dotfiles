@@ -69,23 +69,23 @@ vnoremap S :s//g<Left><Left>
 nnoremap \\ :noh<cr> " Clear higlighting
 
 " Various file formats
-autocmd FileType c setlocal noexpandtab tabstop=4 shiftwidth=4 textwidth=85 colorcolumn=85 textwidth=85
-autocmd FileType h setlocal noexpandtab tabstop=4 shiftwidth=4 textwidth=85 colorcolumn=85 textwidth=85
-autocmd FileType cpp setlocal noexpandtab tabstop=4 shiftwidth=4 textwidth=85 colorcolumn=85 textwidth=85
-autocmd FileType s setlocal noexpandtab tabstop=4 shiftwidth=4 colorcolumn=85 textwidth=85 textwidth=85
-autocmd FileType go setlocal noexpandtab tabstop=4 shiftwidth=4 colorcolumn=85 textwidth=85
+autocmd FileType c setlocal noexpandtab tabstop=4 shiftwidth=4 textwidth=85 colorcolumn=85 textwidth=100
+autocmd FileType h setlocal noexpandtab tabstop=4 shiftwidth=4 textwidth=85 colorcolumn=85 textwidth=100
+autocmd FileType cpp setlocal noexpandtab tabstop=4 shiftwidth=4 textwidth=85 colorcolumn=85 textwidth=100
+autocmd FileType s setlocal noexpandtab tabstop=4 shiftwidth=4 colorcolumn=85 textwidth=85 textwidth=100
+autocmd FileType go setlocal noexpandtab tabstop=4 shiftwidth=4 colorcolumn=85 textwidth=100
 autocmd FileType hy setlocal filetype=lisp
-autocmd FileType sh setlocal noexpandtab tabstop=4 shiftwidth=4 colorcolumn=85 textwidth=85
-autocmd BufRead,BufNewFile *.js setlocal expandtab tabstop=2 shiftwidth=2 colorcolumn=85 textwidth=85
+autocmd FileType sh setlocal noexpandtab tabstop=4 shiftwidth=4 colorcolumn=85 textwidth=120
+autocmd BufRead,BufNewFile *.js setlocal expandtab tabstop=2 shiftwidth=2 colorcolumn=85 textwidth=120
 autocmd FileType html setlocal expandtab tabstop=2 shiftwidth=2
 autocmd FileType htmldjango setlocal expandtab tabstop=2 shiftwidth=2
 autocmd FileType ruby setlocal expandtab tabstop=2 shiftwidth=2 colorcolumn=85 textwidth=85
-autocmd FileType fsharp setlocal expandtab tabstop=2 shiftwidth=2 colorcolumn=85 textwidth=85
-autocmd FileType csharp setlocal expandtab tabstop=4 shiftwidth=4 colorcolumn=85 textwidth=85
-autocmd FileType scss setlocal expandtab tabstop=2 shiftwidth=2 colorcolumn=85 textwidth=85
-autocmd FileType yaml setlocal expandtab tabstop=2 shiftwidth=2 colorcolumn=85 textwidth=85
-autocmd FileType markdown setlocal textwidth=85
-autocmd FileType text setlocal textwidth=85
+autocmd FileType fsharp setlocal expandtab tabstop=2 shiftwidth=2 colorcolumn=85 textwidth=120
+autocmd FileType csharp setlocal expandtab tabstop=4 shiftwidth=4 colorcolumn=85 textwidth=120
+autocmd FileType scss setlocal expandtab tabstop=2 shiftwidth=2 colorcolumn=85 textwidth=120
+autocmd FileType yaml setlocal expandtab tabstop=2 shiftwidth=2 colorcolumn=85 textwidth=120
+autocmd FileType markdown setlocal textwidth=120
+autocmd FileType text setlocal textwidth=120
 autocmd FileType meson setlocal noexpandtab tabstop=2 shiftwidth=2
 autocmd FileType bzl setlocal expandtab tabstop=2 shiftwidth=2
 autocmd BufNewFile,BufRead *.ms set syntax=python tabstop=4 shiftwidth=4 noexpandtab colorcolumn=85 textwidth=85
@@ -121,7 +121,7 @@ inoremap <F10> <esc>:Goyo<CR>a
 
 
 " Automatically deletes all tralling whitespace on save.
-autocmd BufWritePre * %s/\s\+$//e
+" autocmd BufWritePre * %s/\s\+$//e
 
 " Copy selected text to system clipboard (requires xclip installed):
 vnoremap <C-c> "cy<esc>:!echo -n '<C-R>c' \|<space>xclip<CR><enter>
@@ -153,6 +153,12 @@ let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
 let g:cpp_experimental_simple_template_highlight = 1
+
+" fsharp
+" "
+let g:fsharp_only_check_errors_on_write = 1
+let g:fsharp_interactive_bin = '/usr/bin/fsharpi'
+let g:fsharp_xbuild_path = "/usr/bin/xbuild"
 
 " Transparent editing of gpg encrypted files.
 " By Wouter Hanegraaff
