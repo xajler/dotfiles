@@ -38,6 +38,8 @@ alias mw="~/.config/mutt/mutt-wizard.sh"
 alias muttwizard="~/.config/mutt/mutt-wizard.sh"
 alias progs="(pacman -Qet && pacman -Qm) | sort -u" # List programs I've installed
 alias orphans="pacman -Qdt" # List orphan programs
+alias rorphans="sudo pacman -Rns $(pacman -Qtdq)"
+alias pcache="sudo pacman -Scc"
 alias sdn="sudo systemctl poweroff"
 alias newnet="sudo systemctl restart wpa_supplicant@wlp3s0" # Refresh wifi
 alias nf="clear && neofetch" # Le Redditfetch
@@ -66,8 +68,7 @@ alias gtmu="cd /mnt/usb;ls -al"
 # Some aliases
 alias p="sudo pacman"
 alias SS="sudo systemctl"
-alias vim="nvim"
-alias v="vim"
+alias v="nvim"
 alias svi="sudo vim"
 alias r="ranger"
 alias sr="sudo ranger"
@@ -87,7 +88,8 @@ alias ccat="highlight --out-format=xterm256" #Color cat - print file with syntax
 
 # Internet
 alias yt="youtube-dl --add-metadata -ic" # Download video link
-alias yta="youtube-dl --add-metadata -xic" # Download only audio
+alias yta="youtube-dl --add-metadata --extract-audio --audio-format mp3" # Download only audio
+#youtube-dl --extract-audio --audio-format mp3
 alias YT="youtube-viewer"
 alias ethspeed="speedometer -r enp0s25"
 alias wifispeed="speedometer -r wlp3s0"
@@ -99,7 +101,7 @@ alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias hfspmnt="sudo mount -t hfsplus /dev/sdb2 /mnt/usb"
 alias i3tree="i3-msg -t get_tree"
 alias gpg="gpg2"
-
+#alias recplaymic='arecord -d 10 "/tmp/$1-test-mic.waw"; aplay "/tmp/$1-test-mic.waw"'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 

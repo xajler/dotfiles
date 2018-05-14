@@ -4,12 +4,17 @@ syntax enable
 call plug#begin('~/.config/nvim/plugged')
 Plug 'ajmwagar/vim-deus'
 Plug 'junegunn/goyo.vim'
-Plug 'vim-syntastic/syntastic'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 "Plug 'OrangeT/vim-csharp.git'
 Plug 'fsharp/vim-fsharp'
+Plug 'moll/vim-node'
+"Plug 'walm/jsjint.vim'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'maksimr/vim-jsbeautify'
+Plug 'scrooloose/syntastic'
+Plug 'Valloric/YouCompleteMe'
 call plug#end()
 
 colorscheme deus
@@ -58,9 +63,24 @@ let g:deus_termcolors=256
 
 " Shortcutting split navigation, saving a keypress:
 map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+map <C-j> <C-w>t
+map <C-k> <C-w>n
+map <C-l> <C-w>s
+
+map <C-h> :wincmd h<CR>
+map <C-t> :wincmd j<CR>
+map <C-n> :wincmd k<CR>
+map <C-s> :wincmd l<CR>
+
+no t j
+no n k
+no s l
+no j s
+no J S
+no k n
+no K N
+no l t
+no L T 
 
 nnoremap S :%s//g<Left><Left>
 vnoremap S noop
@@ -199,6 +219,13 @@ let git_config_modeline = system("git config --get vim.modeline")
 if strlen(git_config_modeline)
     exe "set" git_config_modeline
 endif
+
+" Node-vim
+autocmd User Node
+  \ if &filetype == "javascript" |
+  \   nmap <buffer> <C-w>f <Plug>NodeVSplitGotoFile |
+  \   nmap <buffer> <C-w><C-f> <Plug>NodeVSplitGotoFile |
+  \ endif<Paste>
 
 " Overrides deus colorscheme
 " Set background transparent

@@ -10,6 +10,12 @@ font pango:mono 9
 set $mod Mod4
 set $term --no-startup-id st
 
+# use these keys for focus, movement, and resize directions
+set $left   h
+set $down   t
+set $up     n
+set $right  s
+
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
 
@@ -18,21 +24,21 @@ focus_follows_mouse no
 
 ###---Starting External Scripts---###
 #Setting the background:
-exec_always --no-startup-id feh --bg-scale ~/.config/wall.png
+exec_always --no-startup-id feh --bg-scale ~/.config/wall.png & disown
 #Starts dunst for notifications:
-exec --no-startup-id dunst
+exec --no-startup-id dunst & disown
 #Music player daemon:
-exec --no-startup-id mpd
+exec --no-startup-id mpd & disown
 #Composite manager:
-exec --no-startup-id compton --xrender-sync-fence
+exec --no-startup-id compton --xrender-sync-fence & disown
 #Runs the key remapping scripts
-exec --no-startup-id ~/.scripts/remaps
+exec --no-startup-id ~/.scripts/remaps & disown
 #Unclutter makes the mouse invisible after a brief period
 #exec --no-startup-id unclutter
 # Lock window
-exec --no-startup-id xautolock -time 10 -locker blurlock
+exec --no-startup-id xautolock -time 10 -locker blurlock & disown
 #Launch Polybar where appropriate:
-exec_always --no-startup-id polybar-launch
+exec_always --no-startup-id polybar-launch & disown
 
 # Cycle desktop wallpapers from given #FEH_SLIDES folder
 exec $HOME/.bin/feh-slides -i 10 "$FEH_SLIDES" & disown
@@ -69,19 +75,19 @@ for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 5
 #exec --no-startup-id $term -n math -f mono:pixelsize=24 -e R -q
 
-
 ###---Basic Bindings---###
 bindsym $mod+F2			    exec --no-startup-id blurlock
 bindsym $mod+Return 		exec $term
-bindsym $mod+Shift+Return 	exec $term -e tmux
+bindsym $mod+Shift+Return 	exec $term
 
 bindsym $mod+Shift+space 	floating toggle
 bindsym $mod+space		    focus mode_toggle
 
-bindsym $mod+Escape		    workspace prev
-bindsym $mod+Shift+Escape 	exec i3-msg exit
+#bindsym $mod+Escape		    workspace prev
+bindsym $mod+Shift+Escape 	exec prompt "Are you sure you want to leave i3?" "i3-msg exit"
 
-bindsym $mod+Shift+BackSpace exec sudo reboot
+bindsym $mod+Shift+BackSpace exec prompt "Are you sure you want to reboot?" "$reboot"
+bindsym $mod+Shift+l restart
 
 #bindsym $mod+asciitilde
 #STOP/HIDE EVERYTHING:
@@ -92,17 +98,16 @@ bindsym $mod+Shift+Delete	exec $truemute ; exec $truepause ; workspace lmao ; ex
 bindsym $mod+q			    kill
 #bindsym $mod+Shift+q	    kill
 
-bindsym $mod+w			    exec --no-startup-id $BROWSER
-#bindsym $mod+Shift+w		exec --no-startup-id waterfox
+bindsym $mod+w			    exec --no-startup-id MOZ_USE_XINPUT2=1 /usr/bin/firefox && disown
+bindsym $mod+Shift+w		floating toggle; sticky toggle; exec --no-startup-id bottomleft
 
 #bindsym $mod+e			    exec $term -e neomutt
 #bindsym $mod+Shift+e
 
 bindsym $mod+r 			    exec $term -e ranger
-bindsym $mod+Shift+r		restart
 
-bindsym $mod+t			    split toggle
-bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
+#bindsym $mod+t			    split toggle
+#bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
 
 bindsym $mod+y			    exec $term -e calcurse
 bindsym $mod+Shift+y		resize shrink width 10 px or 10ppt
@@ -123,8 +128,8 @@ bindsym $mod+a              exec --no-startup-id $term -n math -f mono:pixelsize
 #exec --no-startup-id $term -n math -f mono:pixelsize=24 -e R -q
 bindsym $mod+Shift+a		exec pavucontrol
 
-bindsym $mod+s			    gaps inner current plus 5
-bindsym $mod+Shift+s		gaps inner current minus 5
+bindsym $mod+j		        gaps inner current plus 5
+bindsym $mod+Shift+J		gaps inner current minus 5
 
 bindsym $mod+d			    exec --no-startup-id dmenu_run -p "Run:" -l 10
 bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
@@ -132,20 +137,11 @@ bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 bindsym $mod+f			    fullscreen toggle
 #bindsym $mod+Shift+f
 
-bindsym $mod+g			    workspace prev
+
+bindsym $mod+g              workspace prev 
 #bindsym $mod+Shift+g		exec --no-startup-id gimp; workspace $ws5
-
-bindsym $mod+h			    focus left
-bindsym $mod+Shift+h		move left 30
-
-bindsym $mod+j			    focus down
-bindsym $mod+Shift+j		move down 30
-
-bindsym $mod+k			    focus up
-bindsym $mod+Shift+k		move up 30
-
-bindsym $mod+l			    focus right
-bindsym $mod+Shift+l		move right 30
+bindsym $mod+c              workspace next
+#bindsym $mod+Shift+c
 
 bindsym $mod+z			    gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5
@@ -153,18 +149,12 @@ bindsym $mod+Shift+z		gaps outer current minus 5
 bindsym $mod+x			    exec dmenui3exit
 bindsym $mod+Shift+x		exec prompt "Are you sure you want to shutdown?" "$shutdown"
 
-#bindsym $mod+c			    exec $term -e weechat
-bindsym $mod+c			    exec --no-startup-id camtoggle
-#bindsym $mod+Shift+c
 
 #bindsym $mod+v			    exec urxvt -e vis
 #bindsym $mod+Shift+v		exec projectM-pulseaudio
 
 bindsym $mod+b              exec --no-startup-id $BROWSER
-bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id bottomleft
-
-bindsym $mod+n			    exec $term -e  newsboat -C ~/.config/newsboat/config -u ~/.config/newsboat/urls
-#bindsym $mod+Shift+n		exec $term -e newsboat
+bindsym $mod+Shift+b		exec $term -e  newsboat -C ~/.config/newsboat/config -u ~/.config/newsboat/urls
 
 bindsym $mod+m 			    exec st -T ncmpcpp -n ncmpcpp -w ncmpcpp -e ncmpcpp;
 bindsym $mod+Shift+m		exec $mute
@@ -280,17 +270,6 @@ bindsym $mod+F10	exec --no-startup-id exec --no-startup-id ~/.config/polybar/lau
 #bindsym $mod+F11	exec --no-startup-id ~/.config/Scripts/screen.sh v ;; exec --no-startup-id ~/.config/polybar/launch.sh
 #bindsym $mod+F12	exec --no-startup-id ~/.config/Scripts/screen.sh d ;; exec --no-startup-id ~/.config/polybar/launch.sh
 
-###---Arrow Keys---###
-bindsym $mod+Left		    focus left
-bindsym $mod+Down		    focus down
-bindsym $mod+Up			    focus up
-bindsym $mod+Right 		    focus right
-bindsym $mod+Shift+Left		move left
-bindsym $mod+Shift+Down		move down
-bindsym $mod+Shift+Up		move up
-bindsym $mod+Shift+Right 	move right
-
-
 ###---Media Keys---###
 
 #Volume keys
@@ -339,6 +318,49 @@ bindsym XF86Display		        exec --no-startup-id arandr
 #bindsym XF86Battery		    exec
 #bindsym XF86Bluetooth	    	exec
 
+bindsym $mod+$left  focus left
+bindsym $mod+$down  focus down
+bindsym $mod+$up    focus up
+bindsym $mod+$right focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left   focus left
+bindsym $mod+Down   focus down
+bindsym $mod+Up     focus up
+bindsym $mod+Right  focus right
+
+# move focused window
+bindsym $mod+Shift+$left    move left
+bindsym $mod+Shift+$down    move down
+bindsym $mod+Shift+$up      move up
+bindsym $mod+Shift+$right   move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left     move left
+bindsym $mod+Shift+Down     move down
+bindsym $mod+Shift+Up       move up
+bindsym $mod+Shift+Right    move right
+
+# resize window
+bindsym $mod+Shift+r mode "  "
+mode "  " {
+    # pressing left and up will shrink the window's width and height
+    # pressing right and down will grow the window's width and height
+    bindsym $left   resize shrink width 10 px or 10 ppt
+    bindsym $down   resize grow height 10 px or 10 ppt
+    bindsym $up     resize shrink height 10 px or 10 ppt
+    bindsym $right  resize grow width 10 px or 10 ppt
+
+    # same bindings, but for the arrow keys
+    bindsym Left    resize shrink width 10 px or 10 ppt
+    bindsym Down    resize grow height 10 px or 10 ppt
+    bindsym Up      resize shrink height 10 px or 10 ppt
+    bindsym Right   resize grow width 10 px or 10 ppt
+
+    # back to normal: Enter or win+r
+    bindsym Return mode "default"
+    bindsym $mod+r mode "default"
+}
 
 assign [instance="^stride$"] 8
 for_window [instance="^stride$"] floating enable

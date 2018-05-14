@@ -1,5 +1,9 @@
 # Install Arch Linux
 
+**PLEASE BE AWARE THIS DOTFILES ARE FOR DVORAK USERS AND NOT FOR QWERTY.**
+
+And many Dvorak users will find my remappings not to their taste.
+
 
 ![archlinux](arch.png)
 
@@ -42,8 +46,7 @@ exit && umount -R /mnt && reboot
 Install Pacman apps
 
     # Install all needed apps with pacman
-    sudo pacman -S base-devel neofetch tlp powertop htop lm_sensors fzf alsa-utils alsa-plugins alsa-lib alsa-firmware xorg-server xorg-xinit xcape xf86-video-intel xf86-input-libinput ranger qutebrowser calcurse mpd mpc mpv compton youtube-dl ffmpeg feh scrot tmux lxappearance xautolock mupdf cmatrix openvpn terminus-font ncmpcpp i3-gaps i3status i3lock acpi tree imagemagick w3m sxiv bind-tools libreoffice-fresh r newsboat xclip noto-fonts firefox wget curl libx11 libxft libxinerama freetype2 fontconfig acpi_call-dkms smartmontools gnupg pass openssh dunst dotnet-sdk keybase docker python-pip
-
+    sudo pacman -S base-devel rsync neofetch tlp powertop htop lm_sensors fzf alsa-utils alsa-plugins alsa-lib alsa-firmware xorg-server xorg-xinit xcape xf86-video-intel xf86-input-libinput ranger qutebrowser calcurse mpd mpc mpv compton youtube-dl ffmpeg feh scrot tmux lxappearance xautolock mupdf cmatrix openvpn terminus-font ncmpcpp i3-gaps i3status i3lock acpi tree imagemagick w3m sxiv bind-tools libreoffice-fresh r newsboat xclip noto-fonts firefox wget curl libx11 libxft libxinerama freetype2 fontconfig acpi_call-dkms smartmontools gnupg pass openssh dunst dotnet-sdk keybase docker python-pip transmission-cli transmission-remote-cli-git ttf-inconsolata unrar youtube-viewer ttf-linux-libertine atool figlet highlight mediainfo poppler bluez clang cmake rclone rxvt-unicode urxvt-perls audacity darktable
 
 Install Packer
 
@@ -59,7 +62,7 @@ Install Packer
 
 Install AUR apps
 
-    packer -S yaourt polybar xcalib urlview stride ttf-font-awesome-4 yadm-git openvpn-update-systemd-resolved skypeforlinux-preview-bin fsharp mssql-server mssql-tools
+    packer -S yaourt polybar xcalib urlview stride ttf-font-awesome-4 yadm-git openvpn-update-systemd-resolved skypeforlinux-preview-bin fsharp mssql-server mssql-tools speedometer sc-im paper-icon-theme-git urxvt-resize-font-git ttf-sourcesanspro
 
 ## Dotfiles, user folders, ssh...
 
@@ -203,11 +206,16 @@ Temporary WiFi config (WPA)
 
 Bluetooh
 
-    sudo pacman -S bluez
+    # Disabel bluetooth on start up
+    sudo mkdir -p /etc/bluetooth
+    sudo vim main.conf
+
+    # Add this content:
+    [Policy]
+    AutoEnable=false
+    
     # Turn off bluetooth, use 'on' to turn it  on
-    sudo bluetooth off
-    # TODO: is this working for arch too?
-    # use rc.local to turn it off on startup
+    btoff # or bton
 
 ### Audio
 
@@ -223,6 +231,56 @@ Sound problems mulitpile card (ThinkPad t440s)
 
     # Add this content int o alsa-base.conf (swaps sound cards, so 1 is defaust)
     options snd-hda-intel index=1,0
+
+## Dvorak remapping
+
+Remapped most of used apps to have movement more dvorak and more finger like.
+Since dvorak don't need to mind about ':', my remapping is 'htns' instead of direct remapping 'dhtn'.
+Dvorak 'htns' will be in qwerty 'jkl:', much better for me, never liked that 'h' in qwerty.
+
+    # Changes propageted in most apps
+    jkhl = htns (my remapping to dvorak, even though direct mapping should be 'dhtn')
+    nN = kK (for searching forward/backward)
+
+Changed for i3, vim, less, ranger, qutebrowser, ncmpcpp, newsboat, mainly navigation uses 'htns' and for search forward/backward k/K.
+
+### vim
+
+    # Remaped some movment keys to be dvorak like compatible
+    # it affected search 'n' key and substitute 's'.
+    no t j
+    no n k
+    no s l
+    no j s
+    no J S
+    no k n
+    no K N
+    no l t
+    no L T 
+
+### qutebrowser
+
+    u -> hint (instead of f)
+    'aoeuhtns' -> now used for hints-keys, excluded 'i', from previous mapping.
+
+### less
+
+    t was j               forw-line
+    n was k               back-line
+    k was n               repeat-search
+    K was N               reverse-search
+    c was t               next-tag
+    C was T               prev-tag
+
+### Firefox
+
+To make firefox touch enabled for scrolling and zooming, open Firefox and in address bar enter 'about:config'.
+
+    # Change w3c_touch_events to 1 (default is 2)
+    dom.w3c_touch_events.enabled=1
+    # Run firefox like this, or bind in i3 to key:
+    MOZ_USE_XINPUT2=1 /usr/bin/firefox
+
 
 ### Misc
 
@@ -311,6 +369,10 @@ If error with 'network controller' stop VPN and try again, it works afterwards w
 
     # Choose 3) Express for edition, then enter 'sa' password must be at least 8 chars or longer
     sudo /opt/mssql/bin/mssql-conf setup accept-eula
+    # This will enable mssql server, which is not needed, so disable it
+    sudo systemctl disable mssql-server.service
+    # Then just start mssql service, and use this whenever is needed
+    sudo systemctl start mssql-server.service
 
     # Test connection, if having 1 row affecetd, and version is displayed then it is success
     /opt/mssql-tools/bin/sqlcmd \
