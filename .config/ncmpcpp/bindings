@@ -436,7 +436,7 @@
 #def_key "g"
 #  jump_to_position_in_song
 #
-#def_key "l"
+#def_key "s"
 #  show_lyrics
 #
 #def_key "ctrl-v"
@@ -552,9 +552,9 @@ def_key "+"
 def_key "="
     volume_up
 
-def_key "t" #j
+def_key "j"
     scroll_down
-def_key "n" #k
+def_key "k"
     scroll_up
 
 def_key "ctrl-u"
@@ -569,23 +569,23 @@ def_key "u"
 def_key "d"
     page_down
 #push_characters "jjjjjjjjjjjjjjj"
-def_key "h" #h
+def_key "h"
     previous_column
-def_key "s" #l
+def_key "s"
     next_column
 
 def_key "."
     show_lyrics
 
-def_key "k" #n
+def_key "n"
     next_found_item
-def_key "K" #N
+def_key "N"
     previous_found_item
 
 # not used but bound
-def_key "T"
+def_key "J"
     move_sort_order_down
-def_key "N"
+def_key "K"
     move_sort_order_up
 def_key "h"
   jump_to_parent_directory
@@ -610,3 +610,5 @@ def_key "g"
 #jump_to_position_in_song
 def_key "U"
   update_database
+def_key "l"
+    stop

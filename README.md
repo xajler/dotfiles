@@ -2,7 +2,8 @@
 
 **PLEASE BE AWARE THIS DOTFILES ARE FOR DVORAK USERS AND NOT FOR QWERTY.**
 
-And many Dvorak users will find my remappings not to their taste.
+And many Dvorak users will find my remappings not to their taste in nutshell 'hjkl' QWERTY is 'hjks' Dvorak.
+Only 'lL' is swapped with 'sS', other is same as QWERTY.
 
 
 ![archlinux](arch.png)
@@ -234,43 +235,28 @@ Sound problems mulitpile card (ThinkPad t440s)
 
 ## Dvorak remapping
 
-Remapped most of used apps to have movement more dvorak and more finger like.
-Since dvorak don't need to mind about ':', my remapping is 'htns' instead of direct remapping 'dhtn'.
-Dvorak 'htns' will be in qwerty 'jkl:', much better for me, never liked that 'h' in qwerty.
+Remapped most of used apps to have movement more dvorak like.
+Mainly swapped 'lL' QWERTY to 'sS' on Dvorak.
 
     # Changes propageted in most apps
-    jkhl = htns (my remapping to dvorak, even though direct mapping should be 'dhtn')
-    nN = kK (for searching forward/backward)
+    hjkl = hjks (my remapping to dvorak, swapped 'l' with 's')
 
-Changed for i3, vim, less, ranger, qutebrowser, ncmpcpp, newsboat, mainly navigation uses 'htns' and for search forward/backward k/K.
+Changed for i3, vim, less, ranger, qutebrowser, ncmpcpp, newsboat, mainly navigation uses 'hjks' 
 
 ### vim
 
     # Remaped some movment keys to be dvorak like compatible
-    # it affected search 'n' key and substitute 's'.
-    no t j
-    no n k
+    # 'lL' QWERTY remmaped to 'sS', vim substitute is now 'l' key.
     no s l
-    no j s
-    no J S
-    no k n
-    no K N
-    no l t
-    no L T 
+    no S L
+    no l s
+    no L S
 
 ### qutebrowser
 
     u -> hint (instead of f)
-    'aoeuhtns' -> now used for hints-keys, excluded 'i', from previous mapping.
-
-### less
-
-    t was j               forw-line
-    n was k               back-line
-    k was n               repeat-search
-    K was N               reverse-search
-    c was t               next-tag
-    C was T               prev-tag
+    f -> page up
+    'aoeuhtns' -> now used for hints-keys, excluded 'i'.
 
 ### Firefox
 

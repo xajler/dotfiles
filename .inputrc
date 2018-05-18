@@ -1,9 +1,20 @@
 $include /etc/inputrc
 set editing-mode vi
+set bell-style none
+set show-mode-in-prompt on
+set vi-ins-mode-string 
+set vi-cmd-mode-string :
+set completion-ignore-case on
+# Treat hyphens and underscores as equal
+set completion-map-case on
+set colored-stats on
+
 $if mode=vi
 
 set keymap vi-command
 # these are for vi-command mode
+s: forward-char
+
 Control-l: clear-screen
 
 set keymap vi-insert

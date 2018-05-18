@@ -42,6 +42,7 @@ alias rorphans="sudo pacman -Rns $(pacman -Qtdq)"
 alias pcache="sudo pacman -Scc"
 alias sdn="sudo systemctl poweroff"
 alias newnet="sudo systemctl restart wpa_supplicant@wlp3s0" # Refresh wifi
+alias vpnrestart="sudo systemctl restart openvpn-client@de-05"
 alias nf="clear && neofetch" # Le Redditfetch
 alias psref="gpg-connect-agent RELOADAGENT /bye" # Refresh gpg
 alias btoff="sudo bluetooth off"
@@ -97,7 +98,6 @@ alias tpbs="clear && figlet -c TPB Search && tpb.sh" # Pirate Bay search
 alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
 
 # Misc
-#alias fake="mono /home/x/src/qualtrak/Fake/tools/FAKE.exe"
 alias hfspmnt="sudo mount -t hfsplus /dev/sdb2 /mnt/usb"
 alias i3tree="i3-msg -t get_tree"
 alias gpg="gpg2"

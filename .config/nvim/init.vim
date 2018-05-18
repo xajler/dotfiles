@@ -63,24 +63,16 @@ let g:deus_termcolors=256
 
 " Shortcutting split navigation, saving a keypress:
 map <C-h> <C-w>h
-map <C-j> <C-w>t
-map <C-k> <C-w>n
+map <C-j> <C-w>j
+map <C-k> <C-w>k
 map <C-l> <C-w>s
 
-map <C-h> :wincmd h<CR>
-map <C-t> :wincmd j<CR>
-map <C-n> :wincmd k<CR>
 map <C-s> :wincmd l<CR>
 
-no t j
-no n k
 no s l
-no j s
-no J S
-no k n
-no K N
-no l t
-no L T 
+no S L
+no l s
+no L S
 
 nnoremap S :%s//g<Left><Left>
 vnoremap S noop
@@ -102,7 +94,7 @@ autocmd FileType htmldjango setlocal expandtab tabstop=2 shiftwidth=2
 autocmd FileType ruby setlocal expandtab tabstop=2 shiftwidth=2 colorcolumn=85 textwidth=85
 autocmd FileType fsharp setlocal expandtab tabstop=2 shiftwidth=2 colorcolumn=85 textwidth=120
 autocmd FileType csharp setlocal expandtab tabstop=4 shiftwidth=4 colorcolumn=85 textwidth=120
-autocmd FileType scss setlocal expandtab tabstop=2 shiftwidth=2 colorcolumn=85 textwidth=120
+autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4 colorcolumn=79 textwidth=120
 autocmd FileType yaml setlocal expandtab tabstop=2 shiftwidth=2 colorcolumn=85 textwidth=120
 autocmd FileType markdown setlocal textwidth=120
 autocmd FileType text setlocal textwidth=120

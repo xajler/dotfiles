@@ -80,7 +80,7 @@ Xft.antialias: true
 Xft.hinting: true
 Xft.rgba: rgb
 Xft.autohint: false
-Xft.hintstyle: hintslight
+Xft.hintstyle: hintmedium
 Xft.lcdfilter: lcddefault
 
 XTerm*background: #2b2b2b
