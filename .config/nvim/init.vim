@@ -63,8 +63,8 @@ let g:deus_termcolors=256
 
 " Shortcutting split navigation, saving a keypress:
 map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
+map <C-j> <C-w>t
+map <C-k> <C-w>n
 map <C-l> <C-w>s
 
 map <C-s> :wincmd l<CR>
@@ -133,7 +133,8 @@ inoremap <F10> <esc>:Goyo<CR>a
 
 
 " Automatically deletes all tralling whitespace on save.
-" autocmd BufWritePre * %s/\s\+$//e
+autocmd BufWritePre * %s/\s\+$//e
+map <leader>t :%s/\s\+$//e
 
 " Copy selected text to system clipboard (requires xclip installed):
 vnoremap <C-c> "cy<esc>:!echo -n '<C-R>c' \|<space>xclip<CR><enter>

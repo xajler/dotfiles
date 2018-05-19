@@ -1,0 +1,16 @@
+# Bash history settings.
+export HISTTIMEFORMAT="%F %T "      # the format is from date command
+export HISTCONTROL=ignoredups:ignoreboth       # no duplicate entries
+export HISTSIZE=20000                # big history (default is 500)
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear:pingme:restartvpn:la:bars:free:htop:exit:df:du:srcbash:tpbs:wanip:hfspmnt:qsrc:bton:btoff"
+# Save and reload the history after each command finishes in another bash session.
+#export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+# Highlighting inside manpages and elsewhere.
+export LESS_TERMCAP_mb=$'\e[1;31m'          # start blinking
+export LESS_TERMCAP_md=$'\e[1;34m'          # start bold mode
+export LESS_TERMCAP_me=$'\e[0m'             # end all mode
+export LESS_TERMCAP_so=$'\e[38;5;215m'      # start standout mode
+export LESS_TERMCAP_se=$'\e[0m'             # end standout mode
+export LESS_TERMCAP_us=$'\e[4;35m'          # start underline
+export LESS_TERMCAP_ue=$'\e[0m'             # end underline

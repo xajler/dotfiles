@@ -12,7 +12,7 @@ set $alt Mod1
 set $term --no-startup-id st
 
 # use these keys for focus, movement, and resize directions
-set $left   h 
+set $left   h
 set $down   j
 set $up     k
 set $right  s
@@ -45,8 +45,6 @@ set $dec --no-startup-id amixer sset Master 2%-
 set $bigdec --no-startup-id amixer sset Master 5%-
 set $mute --no-startup-id amixer sset Master toggle
 set $truemute --no-startup-id amixer sset Master mute
-set $screencast  --no-startup-id bash ~/.config/Scripts/screencast_alsa.sh
-set $audio --no-startup-id bash ~/.config/Scripts/audio_alsa.sh
 
 ###---Dropdown/Scratchpad Windows---###
 
@@ -83,7 +81,7 @@ bindsym $mod+q			    kill
 #bindsym $mod+Shift+q	    kill
 
 bindsym $mod+w			    exec --no-startup-id MOZ_USE_XINPUT2=1 /usr/bin/firefox && disown
-#bindsym $mod+Shift+w		
+#bindsym $mod+Shift+w
 
 #bindsym $mod+e			    exec $term -e neomutt
 #bindsym $mod+Shift+e
@@ -126,11 +124,11 @@ bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 bindsym $mod+f			    fullscreen toggle
 #bindsym $mod+Shift+f
 
-bindsym $mod+g              workspace prev 
+bindsym $mod+g              workspace prev
 #bindsym $mod+Shift+g		exec --no-startup-id gimp; workspace $ws5
 
 bindsym $mod+c              workspace next
-bindsym $mod+Shift+c		exec $term -e calcurse
+bindsym $mod+Shift+c		exec $term -e calcurse -d $HOME/.config/calcurse
 
 bindsym $mod+z			    gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5
@@ -261,14 +259,6 @@ bindsym $mod+Shift+bracketright exec $bigfor
 #With shift, it takes one only of the given window.
 bindsym --release Print			exec scrot
 bindsym --release Shift+Print 	exec scrot -u
-
-#For recording audio/video or stop recording. Also screenkey for visual typing.
-bindsym $mod+Print	    	exec --no-startup-id screenkey
-bindsym $mod+Scroll_Lock	exec $audio
-bindsym $mod+Insert		    exec $screencast
-bindsym $mod+Pause		    exec $video
-bindsym $mod+Delete		    exec $stoprec
-bindsym XF86Launch1		    exec $stoprec
 
 ###---Extra XF86 Keys---###
 #These are the extra media keys that some keyboards have.

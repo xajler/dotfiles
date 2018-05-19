@@ -10,7 +10,7 @@
 # magnet link to torrent will be appended
 # you can add -- at the end to indicate end of options
 # (if your program supports it, most do)
-program='/usr/bin/transmission-remote -a'
+program='transmission-remote-cli'
 TPB="https://thepiratebay.org"
 
 # show N first matches by default

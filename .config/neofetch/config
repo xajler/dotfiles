@@ -28,7 +28,7 @@ printinfo () {
     info "DE" de
     info "WM" wm
     info "WM Theme" wmtheme
-    #info "Theme" theme
+    $info "Theme" theme
     #info "Icons" icons
     info "Terminal" term
     info "Terminal Font" termfont
@@ -36,15 +36,15 @@ printinfo () {
     info "GPU" gpu
     info "Memory" memory
 
-     info "CPU Usage" cpu_usage
-     info "Disk" disk
-     #info "Battery" battery
-     #info "Font" font
-     #info "Song" song
-    # info "Local IP" localip
-    # info "Public IP" publicip
-     #info "Users" users
-     #info "Birthday" birthday
+    info "CPU Usage" cpu_usage
+    info "Disk" disk
+    #info "Battery" battery
+    #info "Font" font
+    #info "Song" song
+    #info "Local IP" localip
+    #info "Public IP" publicip
+    #info "Users" users
+    #info "Birthday" birthday
 
     info linebreak
     info cols
@@ -302,7 +302,7 @@ disk_display="off"
 
 # Image Source
 # --image wall, ascii, /path/to/img, /path/to/dir/, off
-image="wall"
+image="$HOME/.config/neofetch/arch.png"
 
 # Thumbnail directory
 thumbnail_dir="$HOME/.cache/thumbnails/neofetch"
@@ -372,7 +372,7 @@ ascii_colors=(distro)
 # variant. Changing the value below to small
 # will make neofetch use the small logo.
 # --ascii_logo_size small, normal
-ascii_logo_size="normal"
+ascii_logo_size="small"
 
 # Bold ascii logo
 # Whether or not to bold the ascii logo.
@@ -425,7 +425,7 @@ config="on"
 
 # Path to custom config file location
 # --config path/to/config
-config_file="${XDG_CONFIG_HOME:-${HOME}/.config}/neofetch/config"
+config_file="${XDG_CONFIG_HOME:-${HOME}/.config}/neofetch/config.conf"
 
 
 # }}}

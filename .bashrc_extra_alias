@@ -1,0 +1,16 @@
+# Directory Shortcuts:
+alias d="cd $HOME/Documents && ls -a"
+alias D="cd $HOME/Downloads && ls -a"
+alias pic="cd $HOME/Pictures && ls -a"
+alias m="cd $HOME/Music && ls -a"
+alias cfr="vim $HOME/.config/ranger/rc.conf.base"
+alias cfi="vim $HOME/.config/i3/config"
+alias cfq="vim $HOME/.config/qutebrowser/config.py"
+alias cfM="vim $HOME/.config/moc/keymap"
+alias cfp="vim $HOME/.config/polybar/config"
+alias cfd="vim $HOME/.Xdefaults"
+
+# App aliases
+alias sr="sudo ranger"
+alias bars="bash $HOME/.scripts/polybar-launch" # Run Polybar relaunch script
+alias i3tree="i3-msg -t get_tree"

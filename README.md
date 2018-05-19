@@ -47,7 +47,7 @@ exit && umount -R /mnt && reboot
 Install Pacman apps
 
     # Install all needed apps with pacman
-    sudo pacman -S base-devel rsync neofetch tlp powertop htop lm_sensors fzf alsa-utils alsa-plugins alsa-lib alsa-firmware xorg-server xorg-xinit xcape xf86-video-intel xf86-input-libinput ranger qutebrowser calcurse mpd mpc mpv compton youtube-dl ffmpeg feh scrot tmux lxappearance xautolock mupdf cmatrix openvpn terminus-font ncmpcpp i3-gaps i3status i3lock acpi tree imagemagick w3m sxiv bind-tools libreoffice-fresh r newsboat xclip noto-fonts firefox wget curl libx11 libxft libxinerama freetype2 fontconfig acpi_call-dkms smartmontools gnupg pass openssh dunst dotnet-sdk keybase docker python-pip transmission-cli transmission-remote-cli-git ttf-inconsolata unrar youtube-viewer ttf-linux-libertine atool figlet highlight mediainfo poppler bluez clang cmake rclone rxvt-unicode urxvt-perls audacity darktable
+    sudo pacman -S base-devel rsync neofetch tlp powertop htop lm_sensors fzf alsa-utils alsa-plugins alsa-lib alsa-firmware xorg-server xorg-xinit xcape xf86-video-intel xf86-input-libinput ranger qutebrowser calcurse mpd mpc mpv compton youtube-dl ffmpeg feh scrot tmux lxappearance xautolock mupdf cmatrix openvpn terminus-font ncmpcpp i3-gaps i3status i3lock acpi tree imagemagick w3m sxiv bind-tools libreoffice-fresh r newsboat xclip noto-fonts firefox wget curl libx11 libxft libxinerama freetype2 fontconfig acpi_call-dkms smartmontools gnupg pass openssh dunst dotnet-sdk keybase docker python-pip transmission-cli transmission-remote-cli-git ttf-inconsolata unrar youtube-viewer ttf-linux-libertine atool figlet highlight mediainfo poppler bluez clang cmake rclone rxvt-unicode urxvt-perls audacity darktable gimp klavaro
 
 Install Packer
 
@@ -214,7 +214,7 @@ Bluetooh
     # Add this content:
     [Policy]
     AutoEnable=false
-    
+
     # Turn off bluetooth, use 'on' to turn it  on
     btoff # or bton
 
@@ -241,7 +241,7 @@ Mainly swapped 'lL' QWERTY to 'sS' on Dvorak.
     # Changes propageted in most apps
     hjkl = hjks (my remapping to dvorak, swapped 'l' with 's')
 
-Changed for i3, vim, less, ranger, qutebrowser, ncmpcpp, newsboat, mainly navigation uses 'hjks' 
+Changed for i3, vim, less, ranger, qutebrowser, ncmpcpp, newsboat, mainly navigation uses 'hjks'
 
 ### vim
 
@@ -375,7 +375,7 @@ If error with 'network controller' stop VPN and try again, it works afterwards w
       -P <sa-passwd> \
       -Q "CREATE LOGIN <new-usr> WITH PASSWORD=N'<new-usr-passwd>', DEFAULT_DATABASE=[master], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF; ALTER SERVER ROLE [sysadmin] ADD MEMBER <new-usr-name>"
 
-### use sqlcmd 
+### use sqlcmd
 
 [Read
 more](https://docs.microsoft.com/en-us/sql/relational-databases/scripting/sqlcmd-use-the-utility?view=sql-server-2017) info about sqlcmd and how to use it.

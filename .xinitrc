@@ -24,29 +24,33 @@ xmodmap -e 'keycode 107 = Super_L'
 
 #### Monitor Calibration
 
-# calibration for ThinkPad t440s
-/usr/bin/xcalib -d :1 .config/icc/Profiles/B140HAN01_2_Easy_D65_201801151337.icm
-# calibration for ThinkPad x220
-#/usr/bin/xcalib -d :0 .config/icc/Profiles/Color-LCD-#1-2016-02-16-02-0-2.2-F-S-XYZLUT+MTX.icc
+# calibration for ThinkPad t440s (Try before, -d display might be different number)
+/usr/bin/xcalib -d :0 $HOME/.config/icc/B140HAN01_2_Easy_D65_201801151337.icm
+# calibration for ThinkPad x220 (Try before, -d display might be different number)
+#/usr/bin/xcalib -d :0 $HOME/.config/icc/Color-LCD-#1-2016-02-16-02-0-2.2-F-S-XYZLUT+MTX.icc
 
 #### Start some apps
 
 #Setting the background:
 feh --bg-scale ~/.config/wall.png & disown
+
 #Starts dunst for notifications:
 dunst & disown
+
 #Music player daemon:
 mpd & disown
+
 #Composite manager:
 compton --xrender-sync-fence & disown
-#Runs the key remapping scripts
-~/.scripts/remaps & disown
+
 #Unclutter makes the mouse invisible after a brief period
- unclutter & disown
+unclutter & disown
+
 # Lock window
-xautolock -time 10 -locker blurlock & disown
+xautolock -time 10 -locker $HOME/.scripts/blurlock & disown
+
 # Cycle desktop wallpapers from given #FEH_SLIDES folder
-$HOME/.bin/feh-slides -i 10 "$FEH_SLIDES" & disown
+$HOME/.scripts/feh-slides -i 10 "$FEH_SLIDES" & disown
 
 
 #### i3
