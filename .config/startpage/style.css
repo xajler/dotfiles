@@ -1,9 +1,13 @@
-html {
-	/* background-color: #fff */
+body {
+    margin: 0px;
+    padding: 0px;
+}
+#start-content-34567 {
+    height: 100vh;
     background-color: #000;
 }
 
-#middle {
+#middle-34567 {
     height: 250px;
     width: 400px;
 	background-color: rgba(40, 40, 40, 0.9);
@@ -18,7 +22,7 @@ html {
     margin-left: -200px;
 }
 
-#text-div {
+#text-div-34567 {
     text-align: center;
     color: #ddd;
     vertical-align: middle;
@@ -27,6 +31,6 @@ html {
     font-family: "Noto Sans",  sans-serif;
 }
 
-#links { text-align: center; }
-#links a { color: #c4a000; text-decoration: none; line-height: 23px; }
-#links a:hover { color: #4e9a06; }
+#links-34567 { text-align: center; }
+#links-34567 a { color: #c4a000; text-decoration: none; line-height: 23px; }
+#links-34567 a:hover { color: #4e9a06; }
