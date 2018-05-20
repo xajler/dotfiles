@@ -80,7 +80,10 @@ bindsym $mod+Shift+Delete	exec $truemute ; exec $truepause ; workspace lmao ; ex
 bindsym $mod+q			    kill
 #bindsym $mod+Shift+q	    kill
 
-bindsym $mod+w			    exec --no-startup-id MOZ_USE_XINPUT2=1 /usr/bin/firefox && disown
+# For Thinkpad t440s and touch enabled screens
+bindsym $mod+w			    exec --no-startup-id MOZ_USE_XINPUT2=1 /usr/bin/firefox
+# For Thinkpad x220 and ordinary screens
+#bindsym $mod+w			    exec --no-startup-id /usr/bin/firefox
 #bindsym $mod+Shift+w
 
 #bindsym $mod+e			    exec $term -e neomutt
