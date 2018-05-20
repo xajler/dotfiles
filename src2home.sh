@@ -11,6 +11,9 @@ doUpdate() {
 		echo -e "\t$item"
 		cp -rf "$SRC_PATH/$item" "$HOME"
 	done
+
+	ln -sf "$HOME/.config/nvim" "$HOME/.vim"
+	ln -sf "$HOME/.config/nvim/init.vim" "$HOME/.vimrc"
 }
 
 read -r -p "Are you sure to overwrite current home dotfiles from src? [y/N] " response
