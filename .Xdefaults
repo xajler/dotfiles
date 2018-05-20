@@ -33,18 +33,19 @@
 Xcursor.size: 		0
 XTerm*faceName: 	xft:terminus:size=9:antialias=true
 
-URxvt.background:       [80]#000000
+URxvt.background:       [85]#000000
 URxvt.depth: 		32
 
 URxvt.intensityStyles:	false
 !! For ThinkPad x220 or smaller screens
 !!URxvt.font: 		xft:terminus:size=9
 !! For ThinkPad t440s or FullHD screens
-URxvt.font: 		xft:terminus:size=11
+URxvt.font: 		xft:Noto Sans Mono:size=11:antialias:true
 URxvt.scrollBar:	false
 URxvt.cursorColor:	magenta
-URxvt.saveLines:    	5000
+URxvt.saveLines:    5000
 URxvt.cursorBlink:	true
+URxvt.letterSpace:  -1
 
 !! Extensions:
 URxvt.perl-ext-common:	default,matcher,resize-font,url-select,keyboard-select
