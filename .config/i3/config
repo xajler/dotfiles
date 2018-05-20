@@ -128,7 +128,7 @@ bindsym $mod+g              workspace prev
 #bindsym $mod+Shift+g		exec --no-startup-id gimp; workspace $ws5
 
 bindsym $mod+c              workspace next
-bindsym $mod+Shift+c		exec $term -e calcurse -d $HOME/.config/calcurse
+bindsym $mod+Shift+c		exec $term -e calcurse -D $HOME/.config/calcurse
 
 bindsym $mod+z			    gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5

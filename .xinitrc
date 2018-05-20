@@ -1,4 +1,4 @@
-# I tink to disable bell?
+# I think disables a bell?
 xset b off
 systemctl --user import-environment DISPLAY
 
@@ -16,10 +16,10 @@ xcape -e 'Super_L=Escape'
 
 # Remap Lenovo keys in older laptos Menu button to Meta in newer Print button to Super
 
-#Remap Menu button to Super (for ThinkPad x220):
+# Remap Menu button to Super (for ThinkPad x220):
 #xmodmap -e 'keycode 135 = Super_L'
 
-#Remap PrtSc button to Super (for ThinkPad t440s - for all thinkpads starting with x230, t430 and newer, all having Print key):
+# Remap PrtSc button to Super (for ThinkPad t440s - for all thinkpads starting with x230, t430 and newer, all having Print key):
 xmodmap -e 'keycode 107 = Super_L'
 
 #### Monitor Calibration
@@ -31,19 +31,19 @@ xmodmap -e 'keycode 107 = Super_L'
 
 #### Start some apps
 
-#Setting the background:
+# Setting the background:
 feh --bg-scale ~/.config/wall.png & disown
 
-#Starts dunst for notifications:
+# Starts dunst for notifications:
 dunst & disown
 
-#Music player daemon:
+# Music player daemon:
 mpd & disown
 
-#Composite manager:
+# Composite manager:
 compton --xrender-sync-fence & disown
 
-#Unclutter makes the mouse invisible after a brief period
+# Unclutter makes the mouse invisible after a brief period
 unclutter & disown
 
 # Lock window
@@ -52,6 +52,8 @@ xautolock -time 10 -locker $HOME/.scripts/blurlock & disown
 # Cycle desktop wallpapers from given #FEH_SLIDES folder
 $HOME/.scripts/feh-slides -i 10 "$FEH_SLIDES" & disown
 
+# Start transmission daemon
+transmission-daemon & disown
 
 #### i3
 
