@@ -6,7 +6,7 @@ DOT_FILES=(".bash_profile" ".bashrc" ".bashrc_extra_alias" ".curlrc" ".dircolors
 DOT_DIRS=(".icons" ".scripts" ".themes")
 CONFIG_FILES=("compton.conf" "user-dirs.dirs" "wall.png")
 CONFIG_DIRS=("dunst" "feh" "fontconfig" "gtk-2.0" "gtk-3.0" "htop" "i3" "icc" \
-	"klavaro" "mpv" "neofetch" "startpage" "sxiv")
+	"klavaro" "mpv" "neofetch" "polybar" "startpage" "sxiv")
 
 doUpdate() {
 	# Root dot files
