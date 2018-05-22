@@ -12,6 +12,8 @@ doUpdate() {
 		cp -rf "$SRC_PATH/$item" "$HOME"
 	done
 
+	rm -rf "$HOME/.vim"
+	rm "$HOME/.vimrc"
 	ln -sf "$HOME/.config/nvim" "$HOME/.vim"
 	ln -sf "$HOME/.config/nvim/init.vim" "$HOME/.vimrc"
 }
