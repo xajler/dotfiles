@@ -62,6 +62,11 @@ alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
 # Misc
 alias srcbash="source $HOME/.bash_profile"
 alias hfspmnt="sudo mount -t hfsplus /dev/sdb2 /mnt/usb"
+alias remaptomod="xmodmap -e 'keycode 107 = Super_L'"
+#For ThinkPad t440s
+alias outputtoprojector="xrandr --output VGA1 --mode 1024x768 --same-as eDP1"
+# For ThinkPad x220
+#alias outputtoprojector="xrandr --output VGA1 --mode 1024x768 --same-as LVDS1"
 #alias recplaymic='arecord -d 10 "/tmp/$1-test-mic.waw"; aplay "/tmp/$1-test-mic.waw"'
 
 [[ -f $HOME/.bashrc_extra_alias ]] && . $HOME/.bashrc_extra_alias
