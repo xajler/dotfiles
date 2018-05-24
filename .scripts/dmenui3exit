@@ -10,7 +10,7 @@ case "$x" in
         i3-msg exit && disown
         ;;
     suspend)
-		SUDO_ASKPASS=~/.scripts/dpass sudo -A bash -c 'blurlock; systemctl suspend'
+		SUDO_ASKPASS=~/.scripts/dpass sudo -A bash -c 'blurlock; systemctl suspend; sudo systemctl restart openvpn-client@de-05'
         ;;
     hibernate)
 		SUDO_ASKPASS=~/.scripts/dpass sudo -A bash -c 'blurlock; systemctl hibernate'
