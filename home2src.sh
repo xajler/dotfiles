@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SRC_PATH="$HOME/src/voidlinux-i3"
+SRC_PATH="$HOME/src/dotfiles"
 DOT_FILES=(".bash_profile" ".bashrc" ".bashrc_extra_alias" ".curlrc" ".dircolors" \
 	".editorconfig" ".exports" ".inputrc" ".tmux.conf" ".urlview" ".Xdefaults" ".xinitrc")
 DOT_DIRS=(".icons" ".scripts" ".themes")
