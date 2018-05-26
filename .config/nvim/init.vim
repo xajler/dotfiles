@@ -15,6 +15,7 @@ Plug 'jelera/vim-javascript-syntax'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'scrooloose/syntastic'
 Plug 'Valloric/YouCompleteMe'
+Plug 'yggdroot/indentline'
 call plug#end()
 
 colorscheme deus
@@ -218,7 +219,7 @@ autocmd User Node
   \ if &filetype == "javascript" |
   \   nmap <buffer> <C-w>f <Plug>NodeVSplitGotoFile |
   \   nmap <buffer> <C-w><C-f> <Plug>NodeVSplitGotoFile |
-  \ endif<Paste>
+  \ endif
 
 " Overrides deus colorscheme
 " Set background transparent

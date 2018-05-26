@@ -74,7 +74,7 @@ Crete user's folders
 Create src folder and clone dotfiles
 
     cd ~/src
-    git clone https://github.com/xajler/voidlinux-i3.git
+    git clone https://github.com/xajler/dotfiles.git
     git fetch
     # Checkout to archlinux branch
     get checkout archlinux
@@ -95,7 +95,7 @@ Copy .ssh and chmod-it
 
 Copy dotfiles to home folder
 
-    cd ~/src/voidlinux-i3
+    cd ~/src/dotfiles
     cp -rf *  ~/
     source .bash_profile
 
