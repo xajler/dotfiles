@@ -38,13 +38,14 @@ set $lilbak --no-startup-id mpc seek -10
 set $bigbak --no-startup-id mpc seek -120
 set $beg --no-startup-id mpc seek 0%
 
-#FOR ALSA/AMIXER
-set $inc --no-startup-id amixer sset Master 2%+
-set $biginc --no-startup-id amixer sset Master 5%+
-set $dec --no-startup-id amixer sset Master 2%-
-set $bigdec --no-startup-id amixer sset Master 5%-
-set $mute --no-startup-id amixer sset Master toggle
-set $truemute --no-startup-id amixer sset Master mute
+#For PULSEAUDIO/PAMIXER
+set $inc --no-startup-id pamixer --allow-boost -i 5
+set $biginc --no-startup-id pamixer --allow-boost -i 15
+set $dec --no-startup-id pamixer --allow-boost -d 5
+set $bigdec --no-startup-id pamixer --allow-boost -d 15
+set $mute --no-startup-id pamixer --allow-boost -t
+set $micmute --no-startup-id pamixer --allow-boost -t
+set $truemute --no-startup-id pamixer -m
 
 ###---Dropdown/Scratchpad Windows---###
 
@@ -81,9 +82,9 @@ bindsym $mod+q			    kill
 #bindsym $mod+Shift+q	    kill
 
 # For ThinkPad t440s and touch enabled screens
-bindsym $mod+w			    exec --no-startup-id MOZ_USE_XINPUT2=1 /usr/bin/firefox
+#bindsym $mod+w			    exec --no-startup-id MOZ_USE_XINPUT2=1 /usr/bin/firefox
 # For ThinkPad x220 and non touch enabled screnns
-#bindsym $mod+w			    exec /usr/bin/firefox
+bindsym $mod+w			    exec /usr/bin/firefox
 #bindsym $mod+Shift+w
 
 #bindsym $mod+e			    exec $term -e neomutt
