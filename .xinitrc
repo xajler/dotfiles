@@ -35,7 +35,7 @@ xmodmap -e 'keycode 107 = Super_L'
 feh --bg-scale ~/.config/wall.png & disown
 
 # Starts dunst for notifications:
-dunst & disown
+#dunst & disown
 
 # Music player daemon:
 mpd & disown
@@ -44,7 +44,7 @@ mpd & disown
 compton --xrender-sync-fence & disown
 
 # Unclutter makes the mouse invisible after a brief period
-unclutter & disown
+#unclutter & disown
 
 # Lock window
 xautolock -time 10 -locker $HOME/.scripts/blurlock & disown
@@ -53,7 +53,7 @@ xautolock -time 10 -locker $HOME/.scripts/blurlock & disown
 $HOME/.scripts/feh-slides -i 10 "$FEH_SLIDES" & disown
 
 # Start transmission daemon
-transmission-daemon & disown
+# transmission-daemon & disown
 
 #### i3
 

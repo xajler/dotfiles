@@ -8,7 +8,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 "Plug 'OrangeT/vim-csharp.git'
-Plug 'fsharp/vim-fsharp'
+Plug 'fsharp/vim-fsharp', {
+      \ 'for': 'fsharp',
+      \ 'do':  'make fsautocomplete',
+      \}
 Plug 'moll/vim-node'
 "Plug 'walm/jsjint.vim'
 Plug 'jelera/vim-javascript-syntax'
@@ -69,6 +72,8 @@ map <C-k> <C-w>n
 map <C-l> <C-w>s
 
 map <C-s> :wincmd l<CR>
+map <C-j> :wincmd j<CR>
+map <C-k> :wincmd k<CR>
 
 no s l
 no S L
@@ -89,7 +94,7 @@ autocmd FileType s setlocal noexpandtab tabstop=4 shiftwidth=4 colorcolumn=85 te
 autocmd FileType go setlocal noexpandtab tabstop=4 shiftwidth=4 colorcolumn=85 textwidth=100
 autocmd FileType hy setlocal filetype=lisp
 autocmd FileType sh setlocal noexpandtab tabstop=4 shiftwidth=4 colorcolumn=85 textwidth=120
-autocmd BufRead,BufNewFile *.js setlocal expandtab tabstop=2 shiftwidth=2 colorcolumn=85 textwidth=120
+autocmd BufRead,BufNewFile *.js setlocal expandtab colorcolumn=85 textwidth=120
 autocmd FileType html setlocal expandtab tabstop=2 shiftwidth=2
 autocmd FileType htmldjango setlocal expandtab tabstop=2 shiftwidth=2
 autocmd FileType ruby setlocal expandtab tabstop=2 shiftwidth=2 colorcolumn=85 textwidth=85

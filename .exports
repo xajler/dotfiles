@@ -2,7 +2,7 @@
 export HISTTIMEFORMAT="%F %T "      # the format is from date command
 export HISTCONTROL=ignoredups:ignoreboth       # no duplicate entries
 export HISTSIZE=20000                # big history (default is 500)
-export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear:pingme:restartvpn:la:bars:free:htop:exit:df:du:srcbash:tpbs:wanip:hfspmnt:qsrc:bton:btoff"
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear:pingme:restartvpn:la:bars:free:htop:exit:df:du:srcbash:tpbs:wanip:hfspmnt:qsrc:bton:btoff:keepassxc"
 # Save and reload the history after each command finishes in another bash session.
 #export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 

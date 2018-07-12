@@ -71,3 +71,10 @@ alias outputtoprojector="xrandr --output VGA1 --mode 1024x768 --same-as eDP1"
 
 [[ -f $HOME/.bashrc_extra_alias ]] && . $HOME/.bashrc_extra_alias
 [[ -f $HOME/.bashrc_private ]] && . $HOME/.bashrc_private
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[ -f /home/x/.npm-global/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /home/x/.npm-global/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[ -f /home/x/.npm-global/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /home/x/.npm-global/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
