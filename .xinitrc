@@ -55,6 +55,9 @@ $HOME/.scripts/feh-slides -i 10 "$FEH_SLIDES" & disown
 # Start transmission daemon
 # transmission-daemon & disown
 
+# Turn off Bluetoot by default
+sudo bluetooth off
+
 #### i3
 
 exec i3
