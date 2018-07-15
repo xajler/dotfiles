@@ -17,17 +17,17 @@ xcape -e 'Super_L=Escape'
 # Remap Lenovo keys in older laptos Menu button to Meta in newer Print button to Super
 
 # Remap Menu button to Super (for ThinkPad x220):
-#xmodmap -e 'keycode 135 = Super_L'
+xmodmap -e 'keycode 135 = Super_L'
 
 # Remap PrtSc button to Super (for ThinkPad t440s - for all thinkpads starting with x230, t430 and newer, all having Print key):
-xmodmap -e 'keycode 107 = Super_L'
+#xmodmap -e 'keycode 107 = Super_L'
 
 #### Monitor Calibration
 
 # calibration for ThinkPad t440s (Try before, -d display might be different number)
-/usr/bin/xcalib -d :0 $HOME/.config/icc/B140HAN01_2_Easy_D65_201801151337.icm
+#/usr/bin/xcalib -d :0 $HOME/.config/icc/B140HAN01_2_Easy_D65_201801151337.icm
 # calibration for ThinkPad x220 (Try before, -d display might be different number)
-#/usr/bin/xcalib -d :0 $HOME/.config/icc/Color-LCD-#1-2016-02-16-02-0-2.2-F-S-XYZLUT+MTX.icc
+/usr/bin/xcalib -d :0 $HOME/.config/icc/Color-LCD-#1-2016-02-16-02-0-2.2-F-S-XYZLUT+MTX.icc
 
 #### Start some apps
 

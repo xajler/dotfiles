@@ -26,15 +26,15 @@ green =  #5ab738
 
 [bar/top]
 ; For ThinkPad x220
-;monitor = ${env:MONITOR:LVDS-1}
+monitor = LVDS-1
 ; For ThinPax t440s
-monitor = eDP1
+;monitor = eDP1
 dpi = 135
 width = 100%
 ; For ThinkPad x220
-; height = 19
+height = 19
 ; For ThinkPad t440s
-height = 24
+;height = 24
 offset-x = 1%
 offset-y = 0
 ;radius = 6.0
@@ -60,21 +60,21 @@ module-margin-left = 0
 module-margin-right = 2
 
 ; For ThinkPad x220 or smaller screens
-;font-0 = NotoSans-Regular:size=6;2
+font-0 = NotoSans-Regular:size=6;2
 ; For ThinkPad t440s or FullHD screen
-font-0 = NotoSans-Regular:size=8;2
+;font-0 = NotoSans-Regular:size=8;2
 font-1 = uniformat:fontformat=truetype:size=8:antialias=false;0
 ; For ThinkPad x220 or smaller screens
-;font-2 = fontawesome:pixelsize=6;1
+font-2 = fontawesome:pixelsize=6;1
 ; For ThinkPad t440s or FullHD screen
-font-2 = fontawesome:pixelsize=7;1
+;font-2 = fontawesome:pixelsize=7;1
 
 modules-left = i3 mpd
 modules-center = date
 ; For partition with home and root with or without battery1
 ;modules-right = home filesystem pkg hwmon volume vpncheck battery # battery1
 ; For single root partition
-modules-right = home filesystem pkg hwmon volume vpncheck battery battery1
+modules-right = filesystem pkg hwmon volume vpncheck battery
 
 tray-position = right
 tray-padding = 0
@@ -312,7 +312,7 @@ time = "%H:%M"
 label = %date% %time%
 
 [module/volume]
-type = internal/volume
+type = internal/alsa
 ; {master,speaker,headphone}-soundcard = default
 ; {master,speaker,headphone}-mixer
 

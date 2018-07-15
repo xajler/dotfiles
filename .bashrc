@@ -11,10 +11,7 @@ fi
 # System Maintainence
 alias hrtime="sudo timedatectl set-timezone Europe/Zagreb && i3 restart"
 alias pingme="ping -c 3 ksphoto.me"
-alias apps="(pacman -Qet && pacman -Qm) | sort -u"
-alias orphans="pacman -Qdt" # List orphan programs
-alias rorphans="sudo pacman -Rns $(pacman -Qtdq)"
-alias pcache="sudo pacman -Scc"
+alias apps="dpkg-query -l | less"
 alias sdn="sudo systemctl poweroff"
 alias newnet="sudo systemctl restart wpa_supplicant@wlp3s0" # Refresh wifi
 alias vpnrestart="sudo systemctl restart openvpn-client@de-05" # Refresh vpn on suspend
@@ -34,7 +31,7 @@ alias cf="cd $HOME/.config && ls -a"
 alias gtmu="cd /mnt/usb;ls -al"
 
 # App aliases
-alias p="sudo pacman"
+alias a="sudo apt"
 alias SS="sudo systemctl"
 alias v="nvim"
 alias svi="sudo vim"
@@ -78,3 +75,7 @@ alias outputtoprojector="xrandr --output VGA1 --mode 1024x768 --same-as eDP1"
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [ -f /home/x/.npm-global/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /home/x/.npm-global/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
+
+if [ -f /etc/bash_completion ]; then
+ . /etc/bash_completion
+fi
