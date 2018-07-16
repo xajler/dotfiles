@@ -19,5 +19,7 @@ DC=$HOME/.dircolors
 test -r $DC && eval "$(dircolors $DC)"
 
 if [[ ! $DISPLAY ]]; then
-  exec startx
+	if [[ "$EUID" -ne 0 ]]; then
+		exec startx
+	fi
 fi
