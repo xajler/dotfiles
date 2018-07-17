@@ -464,12 +464,6 @@ c.content.cookies.store = True
 ## Type: String
 c.content.default_encoding = 'iso-8859-1'
 
-## Enable extra tools for Web developers. This needs to be enabled for
-## `:inspector` to work and also adds an _Inspect_ entry to the context
-## menu. For QtWebEngine, see `--enable-webengine-inspector` in
-## `qutebrowser --help` instead.
-## Type: Bool
-c.content.developer_extras = False
 
 ## Try to pre-fetch DNS entries to speed up browsing.
 ## Type: Bool
@@ -1000,7 +994,9 @@ c.qt.force_platform = None
 ## QtWebEngine to work with Nouveau drivers. This setting requires a
 ## restart.
 ## Type: Bool
-c.qt.force_software_rendering = True
+## The qt.force_software_rendering setting changed from a boolean to taking different values (software-opengl, qt-quick and chromium) for different kinds of software rendering workarounds.
+## Type: String
+c.qt.force_software_rendering = "software-opengl"
 
 ## Show a scrollbar.
 ## Type: Bool
