@@ -14,3 +14,11 @@ alias cfd="vim $HOME/.Xdefaults"
 alias sr="sudo ranger"
 alias bars="bash $HOME/.scripts/polybar-launch" # Run Polybar relaunch script
 alias i3tree="i3-msg -t get_tree"
+
+# vpn aliases
+alias de05="sudo systemctl start openvpn-client@de-05.service"
+alias sde05="sudo systemctl stop openvpn-client@de-05.service"
+alias de08="sudo systemctl start openvpn-client@de-08.service"
+alias sde08="sudo systemctl stop openvpn-client@de-08.service"
+alias uk10="sudo systemctl start openvpn-client@uk-10.service"
+alias suk10="sudo systemctl stop openvpn-client@uk-10.service"
