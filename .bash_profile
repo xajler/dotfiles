@@ -5,7 +5,7 @@ export PATH=$HOME/.local/bin:$HOME/.scripts:$PATH
 export EDITOR="vim"
 export TERMINAL="st" # "urxvt"
 export FEH_SLIDES="$HOME/Pictures/wallpapers"
-export BROWSER="qutebrowser"
+#export BROWSER="qutebrowser"
 export BROWSER="firefox"
 
 # Get additional exports
