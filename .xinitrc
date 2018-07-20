@@ -28,6 +28,14 @@ xmodmap -e 'keycode 135 = Super_L'
 #/usr/bin/xcalib -d :0 $HOME/.config/icc/B140HAN01_2_Easy_D65_201801151337.icm
 # calibration for ThinkPad x220 (Try before, -d display might be different number)
 /usr/bin/xcalib -d :0 $HOME/.config/icc/Color-LCD-#1-2016-02-16-02-0-2.2-F-S-XYZLUT+MTX.icc
+# on some debian instances there is ramp error
+## Create
+# vim  /etc/X11/xorg.conf.d/20-intel.conf
+# and add thi content in it:
+# Section "Device"
+#   Identifier "Intel Graphics"
+#   Driver "intel"
+# EndSection
 
 #### Start some apps
 
@@ -56,7 +64,7 @@ $HOME/.scripts/feh-slides -i 10 "$FEH_SLIDES" & disown
 # transmission-daemon & disown
 
 # Turn off Bluetoot by default
-sudo bluetooth off
+#sudo bluetooth off
 
 #### i3
 
