@@ -2,9 +2,13 @@ stty -ixon
 # Allows you to cd into directory merely by typing the directory name.
 shopt -s autocd
 
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+ }
+
 # Setting Bash prompt. Capitalizes username and host if root user (my root user uses this same config file).
 if [ "$EUID" -ne 0 ]
-	then export PS1="\[$(tput bold)\]\[$(tput setaf 9)\][\[$(tput setaf 11)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 12)\]\h \[$(tput setaf 13)\]\W\[$(tput setaf 9)\]]\[$(tput setaf 15)\]\\$ \[$(tput sgr0)\]"
+	then export PS1="\[$(tput bold)\]\[$(tput setaf 9)\][\[$(tput setaf 11)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 12)\]\h \[$(tput setaf 13)\]\W\[$(tput setaf 9)\]]\[\033[33m\]\$(parse_git_branch)\[\033[00m\]\[$(tput setaf 15)\]\\$ \[$(tput sgr0)\]"
 	else export PS1="\[$(tput bold)\]\[$(tput setaf 9)\][\[$(tput setaf 11)\]ROOT\[$(tput setaf 2)\]@\[$(tput setaf 12)\]$(hostname | awk '{print toupper($0)}') \[$(tput setaf 13)\]\W\[$(tput setaf 9)\]]\[$(tput setaf 15)\]\\$ \[$(tput sgr0)\]"
 fi
 
@@ -35,7 +39,7 @@ alias a="sudo apt"
 alias SS="sudo systemctl"
 alias v="nvim"
 alias svi="sudo vim"
-alias r="ranger"
+#alias r="ranger"
 alias g="git"
 alias gitup="git push origin master"
 alias trem="transmission-remote"
@@ -79,3 +83,5 @@ alias outputtoprojector="xrandr --output VGA1 --mode 1024x768 --same-as eDP1"
 if [ -f /etc/bash_completion ]; then
  . /etc/bash_completion
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
