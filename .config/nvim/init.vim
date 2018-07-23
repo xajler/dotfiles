@@ -231,3 +231,11 @@ autocmd User Node
 highlight Normal guibg=NONE
 " Set ColorColumn to be more darker
 highlight ColorColumn guibg=#222222
+
+" ycm
+" let g:ycm_extra_conf_vim_data   = ['&filetype']
+let g:ycm_auto_trigger = 1
+let g:ycm_min_num_of_chars_for_completion = 3
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
