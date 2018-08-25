@@ -95,6 +95,7 @@ autocmd FileType go setlocal noexpandtab tabstop=4 shiftwidth=4 colorcolumn=85 t
 autocmd FileType hy setlocal filetype=lisp
 autocmd FileType sh setlocal noexpandtab tabstop=4 shiftwidth=4 colorcolumn=85 textwidth=120
 autocmd BufRead,BufNewFile *.js setlocal expandtab colorcolumn=85 textwidth=120
+autocmd FileType javascript let b:syntastic_checkers = ['eslint']
 autocmd FileType html setlocal expandtab tabstop=2 shiftwidth=2
 autocmd FileType htmldjango setlocal expandtab tabstop=2 shiftwidth=2
 autocmd FileType ruby setlocal expandtab tabstop=2 shiftwidth=2 colorcolumn=85 textwidth=85
@@ -153,17 +154,21 @@ map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
 
 " FZF
 " fzf and ripgrep
-map <Leader>p :Files<CR>
+"map <Leader>p :Files<CR>
+map <Leader>f :Files<CR>
 nmap ; :Buffers<CR>
 
 " use ripgrep for finding text
-map <Leader>f :Find<space>
+"map <Leader>f :Find<space>
 command! -bang -nargs=* Find call fzf#vim#grep( 'rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 " Omni complete
 set completeopt=longest,menuone
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <leader>, <C-x><C-o>
+
+map <leader>y "+y
+map <leader>p "+p
 
 
 " cpp
@@ -178,6 +183,14 @@ let g:cpp_experimental_simple_template_highlight = 1
 let g:fsharp_only_check_errors_on_write = 1
 let g:fsharp_interactive_bin = '/usr/bin/fsharpi'
 let g:fsharp_xbuild_path = "/usr/bin/xbuild"
+
+
+" Syntastic
+" "
+
+let g:syntastic_jslint_checkers=['eslint']
+"let g:syntastic_check_on_open=1
+let g:syntastic_enable_signs=1
 
 " Transparent editing of gpg encrypted files.
 " By Wouter Hanegraaff
@@ -239,3 +252,16 @@ let g:ycm_min_num_of_chars_for_completion = 3
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
+" vim-jsbeautify
+".vimrc
+map <leader>b :call JsBeautify()<cr>
+" or
+"autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+" for json
+"autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
+" for jsx
+"autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
+" for html
+"autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+" for css or scss
+"autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
